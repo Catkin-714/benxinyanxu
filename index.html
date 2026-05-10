@@ -6,11 +6,7 @@
     <title>本心研续 | 北京科技大学社会实践团</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --ink: #1a0f2e;
@@ -28,12 +24,11 @@
             --sand: #f5e6d3;
             --clay: #d4a574;
             --border: #e0c9a6;
+            --beijing-red: #dc2626;
+            --sichuan-indigo: #4338ca;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Noto Sans SC', sans-serif;
             background: var(--ivory);
@@ -43,1051 +38,502 @@
 
         /* 加载动画 */
         .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #1b4332;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            position: fixed; inset: 0; background: #1b4332; z-index: 10000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
-
-        .loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
+        .loader.hidden { opacity: 0; visibility: hidden; }
         .loader-text {
-            color: var(--gold-soft);
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: 0.6em;
-            margin-bottom: 2rem;
-            position: relative;
+            color: var(--gold-soft); font-size: 2.2rem; font-weight: 900;
+            letter-spacing: 0.6em; margin-bottom: 2rem; position: relative;
         }
-
         .loader-text::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 2px;
             background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta));
         }
-
-        .loader-bar {
-            width: 200px;
-            height: 3px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-
+        .loader-bar { width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative; }
         .loader-bar::after {
-            content: '';
-            display: block;
-            width: 0%;
-            height: 100%;
+            content: ''; display: block; width: 0%; height: 100%;
             background: linear-gradient(90deg, var(--saffron), var(--gold), var(--turquoise));
             animation: load 1.5s ease forwards;
         }
-
-        @keyframes load {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
+        @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
 
         /* 导航 */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 1.2rem 5%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
             transition: all 0.4s;
         }
-
         nav.scrolled {
-            background: rgba(255,250,240,0.95);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(26,15,46,0.08);
-            padding: 0.8rem 5%;
+            background: rgba(255,250,240,0.95); backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(26,15,46,0.08); padding: 0.8rem 5%;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--ivory);
-            letter-spacing: 0.15em;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        nav.scrolled .logo {
-            color: var(--ink);
-        }
-
-        .logo span {
-            color: var(--gold);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--ivory); letter-spacing: 0.15em; transition: color 0.3s; }
+        nav.scrolled .logo { color: var(--ink); }
+        .logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
         .nav-links a {
-            text-decoration: none;
-            color: var(--ivory);
-            font-weight: 500;
-            font-size: 0.9rem;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: color 0.3s;
-            letter-spacing: 0.1em;
+            text-decoration: none; color: var(--ivory); font-weight: 500; font-size: 0.9rem;
+            position: relative; padding: 0.5rem 0; transition: color 0.3s; letter-spacing: 0.1em;
         }
-
-        nav.scrolled .nav-links a {
-            color: var(--ink);
-        }
-
+        nav.scrolled .nav-links a { color: var(--ink); }
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--saffron), var(--turquoise));
-            transition: width 0.3s ease;
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--saffron), var(--turquoise)); transition: width 0.3s ease;
         }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
+        .nav-links a:hover::after { width: 100%; }
         .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 1001;
-            background: none;
-            border: none;
-            padding: 5px;
+            display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001;
+            background: none; border: none; padding: 5px;
         }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ivory); transition: all 0.3s; }
+        nav.scrolled .menu-toggle span { background: var(--ink); }
 
-        .menu-toggle span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--ivory);
-            transition: all 0.3s;
-        }
-
-        nav.scrolled .menu-toggle span {
-            background: var(--ink);
-        }
-
-        /* Hero - 淡绿色主基调 */
+        /* Hero */
         .hero {
-            min-height: 100vh;
-            width: 100%;
+            min-height: 100vh; width: 100%;
             background: linear-gradient(160deg, #1b4332 0%, #2d6a4f 40%, #40916c 70%, #74c69d 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--ivory);
-            position: relative;
-            overflow: hidden;
-            padding: 0 5%;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--ivory); position: relative; overflow: hidden; padding: 0 5%;
         }
-
         .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255,183,3,0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0,180,216,0.06) 0%, transparent 50%);
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255,183,3,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0,180,216,0.06) 0%, transparent 50%);
         }
-
         .hero-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.04;
+            position: absolute; inset: 0; opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M40 0c0 22-18 40-40 40 22 0 40 18 40 40 0-22 18-40 40-40-22 0-40-18-40-40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             background-size: 120px 120px;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-        }
-
+        .hero-content { position: relative; z-index: 2; max-width: 900px; }
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.6rem 2rem;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 100px;
-            font-size: 0.85rem;
-            margin-bottom: 2.5rem;
-            letter-spacing: 0.15em;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.2s forwards;
-            backdrop-filter: blur(10px);
+            display: inline-flex; align-items: center; gap: 1rem; padding: 0.6rem 2rem;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 100px; font-size: 0.85rem; margin-bottom: 2.5rem; letter-spacing: 0.15em;
+            opacity: 0; animation: fadeInUp 1s ease 0.2s forwards; backdrop-filter: blur(10px);
         }
-
-        .hero-badge .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--gold);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
+        .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
         .hero h1 {
-            font-size: 5.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.25em;
-            line-height: 1;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.4s forwards;
+            font-size: 5.5rem; font-weight: 900; margin-bottom: 1.5rem; letter-spacing: 0.25em; line-height: 1;
+            opacity: 0; animation: fadeInUp 1s ease 0.4s forwards;
             background: linear-gradient(135deg, var(--ivory) 0%, var(--gold-soft) 50%, var(--ivory) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
-            color: rgba(255,250,240,0.85);
-            letter-spacing: 0.2em;
-        }
-
-        .hero .school {
-            font-size: 1rem;
-            color: rgba(255,250,240,0.5);
-            margin-bottom: 3.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.8s forwards;
-            letter-spacing: 0.1em;
-        }
-
+        .hero .subtitle { font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 1s ease 0.6s forwards; color: rgba(255,250,240,0.85); letter-spacing: 0.2em; }
+        .hero .school { font-size: 1rem; color: rgba(255,250,240,0.5); margin-bottom: 3.5rem; opacity: 0; animation: fadeInUp 1s ease 0.8s forwards; letter-spacing: 0.1em; }
         .hero-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 3rem;
-            background: linear-gradient(135deg, var(--saffron), var(--saffron-glow));
-            color: var(--ivory);
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.4s;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1s forwards;
-            letter-spacing: 0.1em;
-            border: none;
-            position: relative;
-            overflow: hidden;
+            display: inline-flex; align-items: center; gap: 0.8rem; padding: 1rem 3rem;
+            background: linear-gradient(135deg, var(--saffron), var(--saffron-glow)); color: var(--ivory);
+            text-decoration: none; border-radius: 100px; font-weight: 600; font-size: 1rem;
+            transition: all 0.4s; opacity: 0; animation: fadeInUp 1s ease 1s forwards;
+            letter-spacing: 0.1em; border: none; position: relative; overflow: hidden;
             box-shadow: 0 8px 30px rgba(232,93,4,0.4);
         }
-
-        .hero-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(232,93,4,0.5);
-            gap: 1.2rem;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .hero-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(232,93,4,0.5); gap: 1.2rem; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         .scroll-indicator {
-            position: absolute;
-            bottom: 2.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255,250,240,0.4);
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            animation: bounce 2s infinite;
-            z-index: 2;
+            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            color: rgba(255,250,240,0.4); font-size: 0.8rem; letter-spacing: 0.15em;
+            animation: bounce 2s infinite; z-index: 2;
         }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
 
         /* 通用区块 */
-        .section-wrapper {
-            width: 100%;
-            padding: 7rem 5%;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
+        .section-wrapper { width: 100%; padding: 7rem 5%; position: relative; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
         .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 0.5rem 1.5rem;
+            display: inline-flex; align-items: center; gap: 0.8rem; padding: 0.5rem 1.5rem;
             background: linear-gradient(135deg, rgba(232,93,4,0.08), rgba(0,180,216,0.08));
-            color: var(--saffron);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.15em;
-            border: 1px solid rgba(232,93,4,0.15);
+            color: var(--saffron); border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+            margin-bottom: 1.2rem; letter-spacing: 0.15em; border: 1px solid rgba(232,93,4,0.15);
         }
-
-        .section-title {
-            font-size: 2.6rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            color: var(--ink);
-            letter-spacing: 0.08em;
-            position: relative;
-            display: inline-block;
-        }
-
+        .section-title { font-size: 2.6rem; font-weight: 900; margin-bottom: 1rem; color: var(--ink); letter-spacing: 0.08em; position: relative; display: inline-block; }
         .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta));
-            border-radius: 2px;
+            content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+            width: 80px; height: 4px; background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta)); border-radius: 2px;
         }
-
-        .section-subtitle {
-            color: var(--ink-light);
-            font-size: 1.05rem;
-            max-width: 650px;
-            margin: 1.8rem auto 0;
-            line-height: 1.9;
-            opacity: 0.8;
-            white-space: nowrap; /* 不换行 */
-        }
+        .section-subtitle { color: var(--ink-light); font-size: 1.05rem; max-width: 650px; margin: 1.8rem auto 0; line-height: 1.9; opacity: 0.8; white-space: nowrap; }
 
         /* 关于我们 */
-        .about-section {
-            background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory-warm) 100%);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text {
-            line-height: 2.2;
-            color: var(--ink-light);
-            font-size: 1rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.2rem;
-            text-align: justify;
-        }
-
-        .about-text strong {
-            color: var(--saffron);
-            font-weight: 700;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
-        }
-
+        .about-section { background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory-warm) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-text { line-height: 2.2; color: var(--ink-light); font-size: 1rem; }
+        .about-text p { margin-bottom: 1.2rem; text-align: justify; }
+        .about-text strong { color: var(--saffron); font-weight: 700; }
+        .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
         .stat-card {
-            background: var(--ivory);
-            padding: 2.2rem 1.5rem;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.4s;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
+            background: var(--ivory); padding: 2.2rem 1.5rem; border-radius: 16px; text-align: center;
+            transition: all 0.4s; border: 1px solid var(--border); position: relative; overflow: hidden;
         }
-
         .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--saffron), var(--turquoise));
-            transform: scaleX(0);
-            transition: transform 0.4s;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--saffron), var(--turquoise)); transform: scaleX(0); transition: transform 0.4s;
         }
-
-        .stat-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(26,15,46,0.1);
-            border-color: var(--saffron);
-        }
-
+        .stat-card:hover::before { transform: scaleX(1); }
+        .stat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(26,15,46,0.1); border-color: var(--saffron); }
         .stat-number {
-            font-size: 2.6rem;
-            font-weight: 900;
-            line-height: 1;
+            font-size: 2.6rem; font-weight: 900; line-height: 1;
             background: linear-gradient(135deg, var(--saffron), var(--turquoise));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            white-space: nowrap;
         }
-
-        .stat-label {
-            color: var(--ink-light);
-            margin-top: 0.8rem;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-        }
+        .stat-label { color: var(--ink-light); margin-top: 0.8rem; font-size: 0.9rem; letter-spacing: 0.05em; }
 
         /* 成果展示 */
-        .achievements-section {
-            background: var(--ivory);
-        }
-
-        .achievement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.8rem;
-        }
-
+        .achievements-section { background: var(--ivory); }
+        .achievement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; }
         .achievement-card {
-            background: var(--ivory);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(26,15,46,0.06);
-            transition: all 0.5s ease;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            position: relative;
+            background: var(--ivory); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(26,15,46,0.06); transition: all 0.5s ease;
+            border: 1px solid var(--border); cursor: pointer; position: relative;
         }
-
         .achievement-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta));
-            transform: scaleX(0);
-            transition: transform 0.4s;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta)); transform: scaleX(0); transition: transform 0.4s;
         }
-
-        .achievement-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 24px 50px rgba(26,15,46,0.12);
-            border-color: var(--clay);
-        }
-
-        .card-image {
-            height: 190px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            font-size: 2.8rem;
-            position: relative;
-            overflow: hidden;
-        }
-
+        .achievement-card:hover::after { transform: scaleX(1); }
+        .achievement-card:hover { transform: translateY(-10px); box-shadow: 0 24px 50px rgba(26,15,46,0.12); border-color: var(--clay); }
+        .card-image { height: 190px; display: flex; align-items: center; justify-content: center; color: var(--ivory); font-size: 2.8rem; position: relative; overflow: hidden; }
         .card-image.saffron { background: linear-gradient(135deg, var(--saffron), #f48c06); }
         .card-image.turquoise { background: linear-gradient(135deg, var(--turquoise-deep), var(--turquoise)); }
         .card-image.magenta { background: linear-gradient(135deg, var(--magenta), var(--magenta-soft)); }
         .card-image.gold { background: linear-gradient(135deg, #f48c06, var(--gold)); }
         .card-image.purple { background: linear-gradient(135deg, #6a4c93, var(--magenta)); }
         .card-image.teal { background: linear-gradient(135deg, var(--turquoise-deep), #2ec4b6); }
-
         .card-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
+        .card-body { padding: 1.8rem; }
+        .card-tag { display: inline-block; padding: 0.35rem 1rem; background: linear-gradient(135deg, rgba(232,93,4,0.1), rgba(0,180,216,0.1)); color: var(--saffron); border-radius: 100px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 0.1em; }
+        .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--ink); }
+        .card-desc { color: var(--ink-light); line-height: 1.8; font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.85; }
+        .card-btn { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--saffron); font-weight: 600; font-size: 0.85rem; transition: gap 0.3s; letter-spacing: 0.05em; }
+        .achievement-card:hover .card-btn { gap: 0.8rem; }
 
-        .card-body {
-            padding: 1.8rem;
+        /* ===== 实践足迹：大气版交互式地图 ===== */
+        .map-section {
+            background: linear-gradient(180deg, var(--ivory) 0%, #e8f5e9 25%, #d8f0e0 50%, #e8f5e9 75%, var(--ivory) 100%);
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            position: relative; overflow: hidden; padding: 7rem 3%;
         }
+        .map-section::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231b4332' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .map-container {
+            position: relative; max-width: 1100px; margin: 0 auto;
+            background: rgba(255, 250, 240, 0.75); backdrop-filter: blur(12px);
+            border-radius: 32px; border: 1px solid var(--border); padding: 2.5rem 2rem;
+            box-shadow: 0 32px 80px rgba(26, 15, 46, 0.12);
+        }
+        .map-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 4px 12px rgba(27, 67, 50, 0.08)); }
+        .map-outline {
+            fill: rgba(27, 67, 50, 0.04); stroke: rgba(27, 67, 50, 0.22);
+            stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: all 0.5s;
+        }
+        .map-container:hover .map-outline { fill: rgba(27, 67, 50, 0.07); stroke: rgba(27, 67, 50, 0.32); }
+        .map-province {
+            fill: none; stroke: rgba(27, 67, 50, 0.1); stroke-width: 1.2;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+        .map-route {
+            fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round;
+            stroke-dasharray: 800; stroke-dashoffset: 800;
+            animation: drawRoute 2.5s ease-out forwards;
+            filter: drop-shadow(0 0 8px currentColor);
+            opacity: 0.8;
+        }
+        .map-route:nth-child(1) { animation-delay: 0.1s; }
+        .map-route:nth-child(2) { animation-delay: 0.3s; }
+        .map-route:nth-child(3) { animation-delay: 0.5s; }
+        .map-route:nth-child(4) { animation-delay: 0.7s; }
+        .map-route:nth-child(5) { animation-delay: 0.9s; }
+        .map-route:nth-child(6) { animation-delay: 1.1s; }
+        @keyframes drawRoute { to { stroke-dashoffset: 0; } }
 
-        .card-tag {
-            display: inline-block;
-            padding: 0.35rem 1rem;
-            background: linear-gradient(135deg, rgba(232,93,4,0.1), rgba(0,180,216,0.1));
-            color: var(--saffron);
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            letter-spacing: 0.1em;
+        .map-markers { position: absolute; inset: 2.5rem 2rem; }
+        .map-marker {
+            position: absolute; width: clamp(22px, 2.8vw, 32px); height: clamp(22px, 2.8vw, 32px);
+            cursor: pointer; transform: translate(-50%, -50%); z-index: 2;
+            --marker-color: var(--saffron);
         }
+        .marker-pulse {
+            position: absolute; inset: -12px; border-radius: 50%;
+            background: var(--marker-color); opacity: 0.25;
+            animation: markerPulse 2.5s ease-out infinite;
+        }
+        .marker-core {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: var(--marker-color);
+            box-shadow: 0 0 0 5px rgba(255, 250, 240, 0.95), 0 0 28px var(--marker-color);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative; z-index: 2;
+        }
+        .map-marker:hover .marker-core { transform: scale(1.45); box-shadow: 0 0 0 7px rgba(255, 250, 240, 0.98), 0 0 40px var(--marker-color); }
+        .map-marker:hover .marker-pulse { animation-duration: 1.2s; }
 
-        .card-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-            color: var(--ink);
+        /* 北京特殊标记 */
+        .map-marker.beijing .marker-core {
+            background: var(--beijing-red);
+            box-shadow: 0 0 0 5px rgba(255, 250, 240, 0.95), 0 0 28px rgba(220, 38, 38, 0.6);
+            border-radius: 50%;
         }
+        .map-marker.beijing .marker-pulse { background: var(--beijing-red); }
+        .map-marker.beijing::after {
+            content: '★'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-size: clamp(11px, 1.6vw, 16px); z-index: 3; pointer-events: none;
+        }
+        .map-marker.beijing:hover .marker-core { box-shadow: 0 0 0 7px rgba(255, 250, 240, 0.98), 0 0 40px rgba(220, 38, 38, 0.8); }
 
-        .card-desc {
-            color: var(--ink-light);
-            line-height: 1.8;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            opacity: 0.85;
+        /* 标签：桌面端左右弹出，避免上下拥挤 */
+        .marker-label {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: var(--ink); color: var(--ivory); padding: 0.5rem 1.2rem;
+            border-radius: 100px; font-size: 0.88rem; font-weight: 700; white-space: nowrap;
+            opacity: 0; transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none; letter-spacing: 0.12em;
+            box-shadow: 0 8px 24px rgba(26, 15, 46, 0.25);
         }
+        /* 左侧标记标签在右边 */
+        .map-marker.label-right .marker-label { left: calc(100% + 14px); }
+        .map-marker.label-right .marker-label::after {
+            content: ''; position: absolute; left: -5px; top: 50%; transform: translateY(-50%);
+            width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-right: 6px solid var(--ink);
+        }
+        /* 右侧标记标签在左边 */
+        .map-marker.label-left .marker-label { right: calc(100% + 14px); }
+        .map-marker.label-left .marker-label::after {
+            content: ''; position: absolute; right: -5px; top: 50%; transform: translateY(-50%);
+            width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 6px solid var(--ink);
+        }
+        .map-marker:hover .marker-label { opacity: 1; }
 
-        .card-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: var(--saffron);
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: gap 0.3s;
-            letter-spacing: 0.05em;
+        .marker-sub {
+            position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+            color: var(--ink-light); font-size: 0.78rem; font-weight: 500; white-space: nowrap;
+            opacity: 0.85; letter-spacing: 0.05em; pointer-events: none;
+            background: rgba(255, 250, 240, 0.92); padding: 0.25rem 0.7rem;
+            border-radius: 100px; border: 1px solid var(--border);
         }
+        @keyframes markerPulse { 0% { transform: scale(1); opacity: 0.3; } 70% { transform: scale(2.2); opacity: 0; } 100% { transform: scale(2.2); opacity: 0; } }
 
-        .achievement-card:hover .card-btn {
-            gap: 0.8rem;
-        }
+        .map-legend { display: flex; justify-content: center; gap: 1.8rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--ink-light); font-weight: 500; letter-spacing: 0.05em; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
 
         /* 弹窗 */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(26, 15, 46, 0.85);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            position: fixed; inset: 0; background: rgba(26, 15, 46, 0.85);
+            backdrop-filter: blur(10px); z-index: 2000;
+            display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal {
-            background: var(--ivory);
-            border-radius: 24px;
-            max-width: 850px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            transform: translateY(20px) scale(0.98);
-            transition: transform 0.3s ease;
-            box-shadow: 0 50px 100px rgba(26,15,46,0.3);
-            border: 1px solid var(--border);
+            background: var(--ivory); border-radius: 24px; max-width: 850px; width: 100%;
+            max-height: 90vh; overflow-y: auto; position: relative;
+            transform: translateY(20px) scale(0.98); transition: transform 0.3s ease;
+            box-shadow: 0 50px 100px rgba(26,15,46,0.3); border: 1px solid var(--border);
         }
-
-        .modal-overlay.active .modal {
-            transform: translateY(0) scale(1);
-        }
-
+        .modal-overlay.active .modal { transform: translateY(0) scale(1); }
         .modal-close {
-            position: absolute;
-            top: 1.2rem;
-            right: 1.2rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--ivory-warm);
-            border: 1px solid var(--border);
-            font-size: 1.3rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 10;
-            color: var(--ink);
+            position: absolute; top: 1.2rem; right: 1.2rem; width: 40px; height: 40px;
+            border-radius: 50%; background: var(--ivory-warm); border: 1px solid var(--border);
+            font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s; z-index: 10; color: var(--ink);
         }
+        .modal-close:hover { background: var(--saffron); color: var(--ivory); border-color: var(--saffron); transform: rotate(90deg); }
 
-        .modal-close:hover {
-            background: var(--saffron);
-            color: var(--ivory);
-            border-color: var(--saffron);
-            transform: rotate(90deg);
+        /* 弹窗左右切换按钮 */
+        .modal-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,250,240,0.95); border: 1px solid var(--border);
+            font-size: 1.6rem; color: var(--ink); cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
+        .modal-nav:hover { background: var(--saffron); color: var(--ivory); border-color: var(--saffron); transform: translateY(-50%) scale(1.1); }
+        .modal-nav.disabled { opacity: 0.3; pointer-events: none; }
+        .modal-prev { left: -64px; }
+        .modal-next { right: -64px; }
+
+        .modal-dots {
+            display: flex; justify-content: center; gap: 0.5rem;
+            margin-top: 1.5rem; padding-bottom: 0.5rem;
+        }
+        .modal-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--border);
+            cursor: pointer; transition: all 0.3s; border: none; padding: 0;
+        }
+        .modal-dot.active { background: var(--saffron); width: 24px; border-radius: 4px; }
+
+        /* 文章标题列表 */
+        .story-list {
+            margin-top: 1.5rem; padding: 1.2rem;
+            background: linear-gradient(135deg, var(--ivory-warm), var(--sand));
+            border-radius: 16px; border: 1px solid var(--border);
+        }
+        .story-list-title {
+            font-size: 0.85rem; font-weight: 700; color: var(--ink-light);
+            margin-bottom: 0.8rem; letter-spacing: 0.1em;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .story-list-title::before {
+            content: ''; width: 4px; height: 16px; background: linear-gradient(180deg, var(--saffron), var(--turquoise)); border-radius: 2px;
+        }
+        .story-item {
+            padding: 0.7rem 1rem; margin-bottom: 0.4rem; border-radius: 10px;
+            font-size: 0.9rem; color: var(--ink-light); cursor: pointer;
+            transition: all 0.3s; display: flex; align-items: center; gap: 0.6rem;
+            border: 1px solid transparent;
+        }
+        .story-item::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: all 0.3s;
+        }
+        .story-item:hover { background: rgba(255,255,255,0.6); border-color: var(--border); }
+        .story-item.active { background: white; border-color: var(--saffron); color: var(--ink); font-weight: 600; box-shadow: 0 2px 8px rgba(232,93,4,0.1); }
+        .story-item.active::before { background: var(--saffron); width: 8px; height: 8px; }
 
         .modal-hero {
-            height: 240px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ivory);
-            font-size: 4rem;
-            position: relative;
+            height: 240px; display: flex; align-items: center; justify-content: center;
+            color: var(--ivory); font-size: 4rem; position: relative;
         }
-
         .modal-hero.saffron { background: linear-gradient(135deg, var(--saffron), #f48c06); }
         .modal-hero.turquoise { background: linear-gradient(135deg, var(--turquoise-deep), var(--turquoise)); }
         .modal-hero.magenta { background: linear-gradient(135deg, var(--magenta), var(--magenta-soft)); }
         .modal-hero.gold { background: linear-gradient(135deg, #f48c06, var(--gold)); }
         .modal-hero.purple { background: linear-gradient(135deg, #6a4c93, var(--magenta)); }
         .modal-hero.teal { background: linear-gradient(135deg, var(--turquoise-deep), #2ec4b6); }
+        .modal-hero.red { background: linear-gradient(135deg, #b91c1c, #dc2626); }
+        .modal-hero.indigo { background: linear-gradient(135deg, #3730a3, #4338ca); }
 
-        .modal-body {
-            padding: 2rem 2.5rem 2.5rem;
-        }
-
-        .modal-tag {
-            display: inline-block;
-            padding: 0.35rem 1rem;
-            background: linear-gradient(135deg, rgba(232,93,4,0.1), rgba(0,180,216,0.1));
-            color: var(--saffron);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            letter-spacing: 0.1em;
-        }
-
-        .modal-title {
-            font-size: 1.7rem;
-            font-weight: 900;
-            color: var(--ink);
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.05em;
-        }
-
-        .modal-content {
-            color: var(--ink-light);
-            line-height: 2;
-            font-size: 0.95rem;
-        }
-
-        .modal-content p {
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-
-        .modal-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1.5rem 0;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, var(--ivory-warm), var(--sand));
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .modal-stat {
-            text-align: center;
-        }
-
-        .modal-stat-value {
-            font-size: 1.7rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--saffron), var(--turquoise));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .modal-stat-label {
-            font-size: 0.8rem;
-            color: var(--ink-light);
-            margin-top: 0.2rem;
-            letter-spacing: 0.05em;
-        }
-
-        /* 图片/视频展示区 */
-        .modal-gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .modal-gallery-item {
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, var(--ivory-warm), var(--sand));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--clay);
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .modal-gallery-item img,
-        .modal-gallery-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: 12px;
-        }
-
-        .modal-gallery-item:hover {
-            border-color: var(--saffron);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(26,15,46,0.08);
-        }
+        .modal-body { padding: 2rem 2.5rem 2.5rem; }
+        .modal-tag { display: inline-block; padding: 0.35rem 1rem; background: linear-gradient(135deg, rgba(232,93,4,0.1), rgba(0,180,216,0.1)); color: var(--saffron); border-radius: 100px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 0.1em; }
+        .modal-title { font-size: 1.7rem; font-weight: 900; color: var(--ink); margin-bottom: 1.2rem; letter-spacing: 0.05em; }
+        .modal-content { color: var(--ink-light); line-height: 2; font-size: 0.95rem; }
+        .modal-content p { margin-bottom: 1rem; text-align: justify; }
+        .modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0; padding: 1.2rem; background: linear-gradient(135deg, var(--ivory-warm), var(--sand)); border-radius: 16px; border: 1px solid var(--border); }
+        .modal-stat { text-align: center; }
+        .modal-stat-value { font-size: 1.7rem; font-weight: 900; background: linear-gradient(135deg, var(--saffron), var(--turquoise)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .modal-stat-label { font-size: 0.8rem; color: var(--ink-light); margin-top: 0.2rem; letter-spacing: 0.05em; }
+        .modal-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        .modal-gallery-item { aspect-ratio: 4/3; background: linear-gradient(135deg, var(--ivory-warm), var(--sand)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--clay); font-size: 0.85rem; border: 1px solid var(--border); transition: all 0.3s; overflow: hidden; position: relative; }
+        .modal-gallery-item img, .modal-gallery-item video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
+        .modal-gallery-item:hover { border-color: var(--saffron); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,15,46,0.08); }
 
         /* 时间线 */
-        .timeline-section {
-            background: linear-gradient(180deg, var(--ivory-warm) 0%, var(--ivory) 100%);
-            border-top: 1px solid var(--border);
-        }
-
-        .timeline-container {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 3px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--saffron), var(--turquoise), var(--magenta));
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            display: flex;
-            justify-content: flex-end;
-            padding-right: calc(50% + 35px);
-            position: relative;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: all 0.7s ease;
-            cursor: pointer;
-        }
-
-        .timeline-item:nth-child(even) {
-            justify-content: flex-start;
-            padding-right: 0;
-            padding-left: calc(50% + 35px);
-            transform: translateX(40px);
-        }
-
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .timeline-content {
-            background: var(--ivory);
-            padding: 1.8rem 2rem;
-            border-radius: 20px;
-            max-width: 380px;
-            position: relative;
-            border: 1px solid var(--border);
-            transition: all 0.4s;
-            box-shadow: 0 4px 15px rgba(26,15,46,0.04);
-        }
-
-        .timeline-content:hover {
-            box-shadow: 0 16px 40px rgba(26,15,46,0.1);
-            border-color: var(--saffron);
-            transform: translateY(-5px);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 1.8rem;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: var(--ivory);
-            border: 4px solid var(--saffron);
-            border-radius: 50%;
-            box-shadow: 0 0 0 6px rgba(232,93,4,0.15);
-            z-index: 2;
-            transition: all 0.3s;
-        }
-
+        .timeline-section { background: linear-gradient(180deg, var(--ivory-warm) 0%, var(--ivory) 100%); border-top: 1px solid var(--border); }
+        .timeline-container { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline-container::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 3px; height: 100%; background: linear-gradient(180deg, var(--saffron), var(--turquoise), var(--magenta)); border-radius: 2px; }
+        .timeline-item { display: flex; justify-content: flex-end; padding-right: calc(50% + 35px); position: relative; margin-bottom: 3rem; opacity: 0; transform: translateX(-40px); transition: all 0.7s ease; cursor: pointer; }
+        .timeline-item:nth-child(even) { justify-content: flex-start; padding-right: 0; padding-left: calc(50% + 35px); transform: translateX(40px); }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-content { background: var(--ivory); padding: 1.8rem 2rem; border-radius: 20px; max-width: 380px; position: relative; border: 1px solid var(--border); transition: all 0.4s; box-shadow: 0 4px 15px rgba(26,15,46,0.04); }
+        .timeline-content:hover { box-shadow: 0 16px 40px rgba(26,15,46,0.1); border-color: var(--saffron); transform: translateY(-5px); }
+        .timeline-dot { position: absolute; left: 50%; top: 1.8rem; transform: translateX(-50%); width: 20px; height: 20px; background: var(--ivory); border: 4px solid var(--saffron); border-radius: 50%; box-shadow: 0 0 0 6px rgba(232,93,4,0.15); z-index: 2; transition: all 0.3s; }
         .timeline-item:nth-child(2) .timeline-dot { border-color: var(--turquoise); box-shadow: 0 0 0 6px rgba(0,180,216,0.15); }
         .timeline-item:nth-child(3) .timeline-dot { border-color: var(--magenta); box-shadow: 0 0 0 6px rgba(157,78,221,0.15); }
         .timeline-item:nth-child(4) .timeline-dot { border-color: var(--gold); box-shadow: 0 0 0 6px rgba(255,183,3,0.15); }
-
-        .timeline-item:hover .timeline-dot {
-            transform: translateX(-50%) scale(1.3);
-        }
-
-        .timeline-date {
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
-        }
-
+        .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.3); }
+        .timeline-date { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; letter-spacing: 0.1em; }
         .timeline-item:nth-child(1) .timeline-date { color: var(--saffron); }
         .timeline-item:nth-child(2) .timeline-date { color: var(--turquoise); }
         .timeline-item:nth-child(3) .timeline-date { color: var(--magenta); }
         .timeline-item:nth-child(4) .timeline-date { color: #f48c06; }
-
-        .timeline-content h4 {
-            font-size: 1.15rem;
-            color: var(--ink);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        .timeline-content p {
-            color: var(--ink-light);
-            font-size: 0.9rem;
-            line-height: 1.8;
-            opacity: 0.85;
-        }
-
-        .timeline-arrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.8rem;
-            margin-top: 0.8rem;
-            font-weight: 500;
-            opacity: 0;
-            transition: all 0.3s;
-            letter-spacing: 0.05em;
-        }
-
+        .timeline-content h4 { font-size: 1.15rem; color: var(--ink); margin-bottom: 0.5rem; font-weight: 700; letter-spacing: 0.05em; }
+        .timeline-content p { color: var(--ink-light); font-size: 0.9rem; line-height: 1.8; opacity: 0.85; }
+        .timeline-arrow { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; margin-top: 0.8rem; font-weight: 500; opacity: 0; transition: all 0.3s; letter-spacing: 0.05em; }
         .timeline-item:nth-child(1) .timeline-arrow { color: var(--saffron); }
         .timeline-item:nth-child(2) .timeline-arrow { color: var(--turquoise); }
         .timeline-item:nth-child(3) .timeline-arrow { color: var(--magenta); }
         .timeline-item:nth-child(4) .timeline-arrow { color: #f48c06; }
+        .timeline-item:hover .timeline-arrow { opacity: 1; gap: 0.6rem; }
 
-        .timeline-item:hover .timeline-arrow {
-            opacity: 1;
-            gap: 0.6rem;
-        }
-
-        /* 页脚 - 浅绿色版本 */
+        /* 页脚 */
         footer {
             background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
-            color: var(--ivory);
-            text-align: center;
-            padding: 5rem 5% 3rem;
-            position: relative;
+            color: var(--ivory); text-align: center; padding: 5rem 5% 3rem; position: relative;
         }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta), var(--gold));
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.3em;
-            color: var(--ivory);
-        }  
-
-        .footer-logo span {
-            color: var(--gold);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: rgba(255,250,240,0.6);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .footer-info {
-            color: rgba(255,250,240,0.5);
-            line-height: 2;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-        }
-
+        footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--saffron), var(--turquoise), var(--magenta), var(--gold)); }
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 1.2rem; letter-spacing: 0.3em; color: var(--ivory); }
+        .footer-logo span { color: var(--gold); }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,250,240,0.6); text-decoration: none; transition: all 0.3s; font-size: 0.9rem; letter-spacing: 0.1em; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-info { color: rgba(255,250,240,0.5); line-height: 2; font-size: 0.9rem; letter-spacing: 0.05em; }
 
         /* 滚动显示 */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.9s ease;
-        }
-
-        .scroll-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.9s ease; }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* 响应式 */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; letter-spacing: 0.15em; }
             .hero .subtitle { font-size: 1.1rem; }
-            
             .menu-toggle { display: flex; }
-            
             .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: rgba(255,250,240,0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2rem;
-                transition: right 0.4s ease;
-                box-shadow: -10px 0 30px rgba(26,15,46,0.1);
+                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
+                background: rgba(255,250,240,0.98); backdrop-filter: blur(20px);
+                flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+                transition: right 0.4s ease; box-shadow: -10px 0 30px rgba(26,15,46,0.1);
             }
-            
             .nav-links.active { right: 0; }
             .nav-links a { color: var(--ink) !important; font-size: 1.1rem; }
-            
             .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .achievement-grid { grid-template-columns: 1fr; }
             .section-title { font-size: 1.9rem; }
             .section-wrapper { padding: 4rem 5%; }
             .section-subtitle { white-space: normal; font-size: 0.95rem; }
-            
-            .timeline-container::before {
-                left: 24px;
-                transform: none;
+
+            .map-section { padding: 4rem 3%; }
+            .map-container { padding: 1.2rem; border-radius: 20px; }
+            .map-markers { inset: 1.2rem; }
+            .map-marker { width: 18px; height: 18px; }
+            .marker-pulse { inset: -8px; }
+            .marker-label {
+                font-size: 0.75rem; padding: 0.35rem 0.8rem;
+                left: 50% !important; right: auto !important; top: auto !important;
+                bottom: calc(100% + 10px); transform: translateX(-50%) translateY(0);
             }
-            
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                justify-content: flex-start;
-                padding-left: 60px;
-                padding-right: 0;
-                transform: translateX(-20px);
+            .marker-label::after {
+                left: 50% !important; right: auto !important; top: auto !important;
+                bottom: -5px; transform: translateX(-50%);
+                border-left: 5px solid transparent; border-right: 5px solid transparent;
+                border-top: 5px solid var(--ink); border-bottom: none !important;
             }
-            
-            .timeline-item:nth-child(even) {
-                transform: translateX(-20px);
-            }
-            
-            .timeline-item.visible {
-                transform: translateX(0);
-            }
-            
-            .timeline-content {
-                max-width: 100%;
-                margin: 0;
-            }
-            
-            .timeline-dot {
-                left: 24px;
-                transform: translateX(-50%);
-                top: 1.5rem;
-            }
-            
-            .timeline-item:hover .timeline-dot {
-                transform: translateX(-50%) scale(1.3);
-            }
-            
+            .map-marker:hover .marker-label { opacity: 1; }
+            .marker-sub { font-size: 0.65rem; padding: 0.15rem 0.5rem; top: calc(100% + 4px); }
+            .map-legend { gap: 0.8rem; margin-top: 1.5rem; }
+            .legend-item { font-size: 0.8rem; }
+
             .modal { border-radius: 20px; }
             .modal-body { padding: 1.5rem; }
             .modal-hero { height: 180px; font-size: 3rem; }
             .modal-stats { grid-template-columns: 1fr; }
             .modal-gallery { grid-template-columns: 1fr; }
+            .modal-nav { width: 40px; height: 40px; font-size: 1.3rem; }
+            .modal-prev { left: 8px; }
+            .modal-next { right: 8px; }
+            .story-item { font-size: 0.85rem; padding: 0.6rem 0.8rem; }
             .timeline-arrow { opacity: 1; }
+
+            .stat-number { font-size: 2rem; }
+
+            .timeline-container::before { left: 24px; transform: none; }
+            .timeline-item, .timeline-item:nth-child(even) { justify-content: flex-start; padding-left: 60px; padding-right: 0; transform: translateX(-20px); }
+            .timeline-item:nth-child(even) { transform: translateX(-20px); }
+            .timeline-item.visible { transform: translateX(0); }
+            .timeline-content { max-width: 100%; margin: 0; }
+            .timeline-dot { left: 24px; transform: translateX(-50%); top: 1.5rem; }
+            .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.3); }
         }
     </style>
 </head>
@@ -1103,37 +549,32 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#about" onclick="closeMenu()">关于我们</a></li>
             <li><a href="#achievements" onclick="closeMenu()">实践成果</a></li>
+            <li><a href="#map" onclick="closeMenu()">实践足迹</a></li>
             <li><a href="#timeline" onclick="closeMenu()">实践历程</a></li>
             <li><a href="#contact" onclick="closeMenu()">联系我们</a></li>
         </ul>
         <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
     </nav>
 
-    <!-- 首屏：淡绿色主基调 -->
+    <!-- 首屏 -->
     <section class="hero">
         <div class="hero-pattern"></div>
         <div class="hero-content">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                北京科技大学 · 社会实践团
-            </div>
+            <div class="hero-badge"><span class="dot"></span>北京科技大学 · 社会实践团</div>
             <h1>本心研续</h1>
             <div class="subtitle">以初心为引，以研究为续</div>
             <div class="school">2026 · 民族文化主题实践成果展示</div>
-            <a href="#achievements" class="hero-btn">探索成果 →</a>
+            <a href="#map" class="hero-btn">探索足迹 →</a>
         </div>
         <div class="scroll-indicator">
             <span>向下滚动</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </div>
     </section>
 
+    <!-- 关于我们 -->
     <div class="section-wrapper about-section" id="about">
         <div class="container">
             <div class="section-header scroll-reveal">
@@ -1141,35 +582,23 @@
                 <h2 class="section-title">关于我们</h2>
                 <p class="section-subtitle">秉承"求实鼎新"校训精神，以青年之我投身民族文化实践，寻访多彩民族足迹</p>
             </div>
-            
             <div class="about-grid">
                 <div class="about-text scroll-reveal">
                     <p>北京科技大学<strong>"本心研续"</strong>社会实践团，是一支由多学科优秀学子组成的青年实践队伍。2026年，我们以<strong>民族文化</strong>为核心主题，深入少数民族聚居区，探寻文化根脉。</p>
-                    <p>团队聚焦<strong>民族技艺</strong>、<strong>文化传承</strong>、<strong>乡村振兴</strong>三大方向，深入新疆、贵州、云南等地，记录艾德莱斯绸的绚烂、苗绣的精巧、藏毯的厚重。</p>
+                    <p>团队聚焦<strong>民族技艺</strong>、<strong>文化传承</strong>、<strong>乡村振兴</strong>三大方向，<strong>分六支小队同时奔赴</strong>新疆、西藏、广西、贵州、内蒙古、四川，记录艾德莱斯的绚烂、藏毯的厚重、壮锦的瑰丽、苗绣的精巧、草原的辽阔、彝漆的古朴。</p>
                     <p>我们相信，每一种色彩都有故事，每一根丝线都连着根脉。初心不改，研续前行。</p>
                 </div>
                 <div class="about-stats scroll-reveal">
-                    <div class="stat-card">
-                        <div class="stat-number">45</div>
-                        <div class="stat-label">实践天数</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">12</div>
-                        <div class="stat-label">民族地区</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">8</div>
-                        <div class="stat-label">调研报告</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3000+</div>
-                        <div class="stat-label">服务群众</div>
-                    </div>
+                    <div class="stat-card"><div class="stat-number">73</div><div class="stat-label">实践天数</div></div>
+                    <div class="stat-card"><div class="stat-number">6+1</div><div class="stat-label">省区足迹</div></div>
+                    <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">调研报告</div></div>
+                    <div class="stat-card"><div class="stat-number">5000+</div><div class="stat-label">服务群众</div></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 实践成果 -->
     <div class="section-wrapper achievements-section" id="achievements">
         <div class="container">
             <div class="section-header scroll-reveal">
@@ -1177,64 +606,58 @@
                 <h2 class="section-title">实践成果</h2>
                 <p class="section-subtitle">每一份成果都凝结着团队的汗水与智慧，点击查看详情</p>
             </div>
-            
             <div class="achievement-grid">
                 <div class="achievement-card scroll-reveal" onclick="openModal(0)">
                     <div class="card-image saffron">📊</div>
                     <div class="card-body">
                         <span class="card-tag">调研报告</span>
-                        <h3 class="card-title">乡村非遗产业发展现状深度调研</h3>
-                        <p class="card-desc">深入走访5个典型村落，聚焦艾德莱斯绸、砖雕等非遗项目，形成万字调研报告。</p>
+                        <h3 class="card-title">六地非遗产业发展现状深度调研</h3>
+                        <p class="card-desc">深入走访六省区典型村落，聚焦艾德莱斯绸、藏毯、壮锦等非遗项目，形成系列调研报告。</p>
                         <span class="card-btn">查看详情 →</span>
                     </div>
                 </div>
-                
                 <div class="achievement-card scroll-reveal" onclick="openModal(1)">
                     <div class="card-image turquoise">🏺</div>
                     <div class="card-body">
                         <span class="card-tag">非遗寻访</span>
-                        <h3 class="card-title">喀什艾德莱斯绸技艺记录</h3>
-                        <p class="card-desc">实地走访喀什非遗工坊，记录艾德莱斯绸织造技艺，访谈传承人，整理技艺流程档案。</p>
+                        <h3 class="card-title">多民族技艺档案记录</h3>
+                        <p class="card-desc">实地走访六地非遗工坊，记录织造、刺绣、髹饰等技艺，访谈传承人，整理技艺流程档案。</p>
                         <span class="card-btn">查看详情 →</span>
                     </div>
                 </div>
-                
                 <div class="achievement-card scroll-reveal" onclick="openModal(2)">
                     <div class="card-image magenta">🧵</div>
                     <div class="card-body">
                         <span class="card-tag">民族技艺</span>
-                        <h3 class="card-title">黔东南苗绣纹样考察</h3>
-                        <p class="card-desc">深入贵州苗寨，记录苗绣针法与纹样寓意，建立数字化纹样库，助力活态传承。</p>
+                        <h3 class="card-title">西南民族纹样考察</h3>
+                        <p class="card-desc">深入贵州、广西、四川等地，记录苗绣、壮锦、彝漆纹样，建立数字化纹样库。</p>
                         <span class="card-btn">查看详情 →</span>
                     </div>
                 </div>
-                
                 <div class="achievement-card scroll-reveal" onclick="openModal(3)">
                     <div class="card-image gold">🎥</div>
                     <div class="card-body">
                         <span class="card-tag">影像记录</span>
                         <h3 class="card-title">《织彩》民族文化纪录片</h3>
-                        <p class="card-desc">全程记录民族文化寻访历程，制作纪录片一部，展现多彩民族技艺的温度与坚守。</p>
+                        <p class="card-desc">全程记录六地民族文化寻访历程，制作纪录片一部，展现多彩民族技艺的温度与坚守。</p>
                         <span class="card-btn">查看详情 →</span>
                     </div>
                 </div>
-                
                 <div class="achievement-card scroll-reveal" onclick="openModal(4)">
                     <div class="card-image purple">💡</div>
                     <div class="card-body">
                         <span class="card-tag">创新设计</span>
                         <h3 class="card-title">民族纹样现代转译设计</h3>
-                        <p class="card-desc">提取艾德莱斯、苗绣、藏毯经典纹样，进行现代设计转译，开发文创产品系列。</p>
+                        <p class="card-desc">提取六地经典纹样，进行现代设计转译，开发"山河六色"文创产品系列。</p>
                         <span class="card-btn">查看详情 →</span>
                     </div>
                 </div>
-                
                 <div class="achievement-card scroll-reveal" onclick="openModal(5)">
                     <div class="card-image teal">🌐</div>
                     <div class="card-body">
                         <span class="card-tag">媒体宣传</span>
                         <h3 class="card-title">多平台民族文化传播矩阵</h3>
-                        <p class="card-desc">实践成果获国家级媒体报道3篇、省市级报道8篇，全网阅读量超80万。</p>
+                        <p class="card-desc">实践成果获国家级媒体报道5篇、省市级报道12篇，全网阅读量超150万。</p>
                         <span class="card-btn">查看详情 →</span>
                     </div>
                 </div>
@@ -1242,10 +665,116 @@
         </div>
     </div>
 
-    <!-- 弹窗详情 -->
+    <!-- ===== 实践足迹：大气版交互式地图 ===== -->
+    <div class="section-wrapper map-section" id="map">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-label">FOOTPRINT</div>
+                <h2 class="section-title">实践足迹</h2>
+                <p class="section-subtitle">六支小队同时出发，从北京奔赴山河，点击光点探索各地实践故事</p>
+            </div>
+
+            <div class="map-container scroll-reveal">
+                <svg class="map-svg" viewBox="0 0 1000 550" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="gradXinjiang" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#e85d04"/><stop offset="100%" stop-color="#ff8c42"/></linearGradient>
+                        <linearGradient id="gradTibet" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0077b6"/><stop offset="100%" stop-color="#00b4d8"/></linearGradient>
+                        <linearGradient id="gradSichuan" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3730a3"/><stop offset="100%" stop-color="#6366f1"/></linearGradient>
+                        <linearGradient id="gradGuizhou" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9d4edd"/><stop offset="100%" stop-color="#c77dff"/></linearGradient>
+                        <linearGradient id="gradGuangxi" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0e7490"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient>
+                        <linearGradient id="gradNeimeng" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d97706"/><stop offset="100%" stop-color="#fbbf24"/></linearGradient>
+                        <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    </defs>
+
+                    <!-- 简化中国地图轮廓（更宽扁） -->
+                    <path class="map-outline" d="M 720,45 C 760,40 800,55 820,85 C 840,115 830,145 810,165 C 790,185 770,180 750,175 L 720,165 C 700,160 680,165 660,170 C 640,175 620,170 600,160 C 580,150 560,145 540,150 C 520,155 500,150 480,140 C 460,130 440,125 420,130 C 400,135 380,130 360,125 C 340,120 320,130 305,150 C 290,170 280,200 285,230 C 290,260 305,290 325,315 C 345,340 375,355 405,355 C 435,355 460,370 480,395 C 500,420 525,440 555,450 C 585,460 615,450 645,430 C 675,410 695,385 710,355 C 725,325 730,295 720,265 C 710,235 700,215 690,195 L 720,165 C 730,145 725,120 720,95 C 715,70 720,55 720,45 Z" />
+                    <!-- 内部省界装饰线 -->
+                    <path class="map-province" d="M 480,140 C 500,190 520,240 540,290 C 560,340 580,370 600,390" />
+                    <path class="map-province" d="M 360,125 C 380,170 400,210 420,250 C 440,290 460,320 480,340" />
+                    <path class="map-province" d="M 600,160 C 620,210 640,260 660,310 C 680,360 690,390 710,410" />
+                    <path class="map-province" d="M 420,250 C 460,270 500,290 540,310" />
+
+                    <!-- 星型辐射路线：北京(地图外右侧) → 六地 -->
+                    <path class="map-route" d="M 850,120 L 180,198" stroke="url(#gradXinjiang)" />
+                    <path class="map-route" d="M 850,120 L 280,348" stroke="url(#gradTibet)" />
+                    <path class="map-route" d="M 850,120 L 380,312" stroke="url(#gradSichuan)" />
+                    <path class="map-route" d="M 850,120 L 430,372" stroke="url(#gradGuizhou)" />
+                    <path class="map-route" d="M 850,120 L 470,432" stroke="url(#gradGuangxi)" />
+                    <path class="map-route" d="M 850,120 L 580,118" stroke="url(#gradNeimeng)" />
+                </svg>
+
+                <div class="map-markers">
+                    <!-- 北京：地图外右侧独立区域 -->
+                    <div class="map-marker beijing label-left" style="left: 85%; top: 22%;" onclick="openLocationModal('beijing', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">北京 · 总团集结</div>
+                        <div class="marker-sub">出征/培训</div>
+                    </div>
+
+                    <div class="map-marker label-right" style="left: 18%; top: 36%; --marker-color: var(--saffron);" onclick="openLocationModal('xinjiang', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">新疆 · 丝路织彩</div>
+                        <div class="marker-sub">喀什/吐鲁番</div>
+                    </div>
+
+                    <div class="map-marker label-right" style="left: 28%; top: 63%; --marker-color: var(--turquoise);" onclick="openLocationModal('tibet', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">西藏 · 雪域匠心</div>
+                        <div class="marker-sub">拉萨/日喀则</div>
+                    </div>
+
+                    <div class="map-marker label-right" style="left: 38%; top: 57%; --marker-color: var(--sichuan-indigo);" onclick="openLocationModal('sichuan', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">四川 · 蜀地藏彝</div>
+                        <div class="marker-sub">成都/阿坝/凉山</div>
+                    </div>
+
+                    <div class="map-marker label-right" style="left: 43%; top: 68%; --marker-color: var(--magenta);" onclick="openLocationModal('guizhou', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">贵州 · 苗岭绣语</div>
+                        <div class="marker-sub">黔东南</div>
+                    </div>
+
+                    <div class="map-marker label-right" style="left: 47%; top: 79%; --marker-color: var(--turquoise-deep);" onclick="openLocationModal('guangxi', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">广西 · 壮锦悠扬</div>
+                        <div class="marker-sub">桂林/柳州/南宁</div>
+                    </div>
+
+                    <div class="map-marker label-left" style="left: 58%; top: 21%; --marker-color: var(--gold);" onclick="openLocationModal('neimenggu', 0)">
+                        <div class="marker-pulse"></div>
+                        <div class="marker-core"></div>
+                        <div class="marker-label">内蒙古 · 草原遗韵</div>
+                        <div class="marker-sub">呼和浩特/呼伦贝尔</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-legend scroll-reveal">
+                <div class="legend-item"><div class="legend-dot" style="background: var(--beijing-red); color: var(--beijing-red);"></div>北京</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--saffron); color: var(--saffron);"></div>新疆</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--turquoise); color: var(--turquoise);"></div>西藏</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--sichuan-indigo); color: var(--sichuan-indigo);"></div>四川</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--magenta); color: var(--magenta);"></div>贵州</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--turquoise-deep); color: var(--turquoise-deep);"></div>广西</div>
+                <div class="legend-item"><div class="legend-dot" style="background: var(--gold); color: var(--gold);"></div>内蒙古</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹窗详情（支持左右/滑动切换同地点多篇推文） -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
+            <button class="modal-nav modal-prev" id="modalPrev" onclick="changeStory(-1)">‹</button>
+            <button class="modal-nav modal-next" id="modalNext" onclick="changeStory(1)">›</button>
+
             <div class="modal-hero" id="modalHero">📊</div>
             <div class="modal-body">
                 <span class="modal-tag" id="modalTag">标签</span>
@@ -1253,10 +782,16 @@
                 <div class="modal-stats" id="modalStats"></div>
                 <div class="modal-content" id="modalContent"></div>
                 <div class="modal-gallery" id="modalGallery"></div>
+
+                <!-- 文章列表 -->
+                <div class="story-list" id="storyList"></div>
+
+                <div class="modal-dots" id="modalDots"></div>
             </div>
         </div>
     </div>
 
+    <!-- 实践历程 -->
     <div class="section-wrapper timeline-section" id="timeline">
         <div class="container">
             <div class="section-header scroll-reveal">
@@ -1264,44 +799,40 @@
                 <h2 class="section-title">实践历程</h2>
                 <p class="section-subtitle">一步一个脚印，记录我们的成长轨迹，点击卡片查看详细经过</p>
             </div>
-            
             <div class="timeline-container">
                 <div class="timeline-item scroll-reveal" onclick="openModal(6)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">2026年6月 · 筹备期</div>
                         <h4>团队组建与方案设计</h4>
-                        <p>完成跨学科队员招募，确定"民族文化寻访"主题实践方案。</p>
+                        <p>完成跨学科队员招募，确定"六地民族文化寻访"主题实践方案。</p>
                         <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
-                
                 <div class="timeline-item scroll-reveal" onclick="openModal(7)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2026年7月 · 新疆期</div>
-                        <h4>喀什艾德莱斯绸实地调研</h4>
-                        <p>赴新疆喀什，走访艾德莱斯绸工坊，记录织造技艺，访谈非遗传承人。</p>
+                        <div class="timeline-date">2026年7月 · 出征期</div>
+                        <h4>六支小队同时出征</h4>
+                        <p>北京总团举行出征仪式，六支小队分赴新疆、西藏、内蒙古及西南三地。</p>
                         <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
-                
                 <div class="timeline-item scroll-reveal" onclick="openModal(8)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2026年8月 · 黔滇期</div>
-                        <h4>苗绣与藏毯考察</h4>
-                        <p>深入贵州苗寨与云南藏区，考察苗绣与藏毯技艺，记录民族文化。</p>
+                        <div class="timeline-date">2026年7-8月 · 调研期</div>
+                        <h4>六地并行实地调研</h4>
+                        <p>六支小队在各自目的地深入走访非遗工坊，访谈传承人，记录民族技艺。</p>
                         <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
-                
                 <div class="timeline-item scroll-reveal" onclick="openModal(9)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">2026年9月 · 总结期</div>
                         <h4>成果凝练与展示汇报</h4>
-                        <p>整理数据形成8篇调研报告，制作纪录片与文创设计，参加校级评比。</p>
+                        <p>整理数据形成12篇调研报告，制作纪录片与文创设计，参加校级评比。</p>
                         <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
@@ -1314,6 +845,7 @@
         <div class="footer-links">
             <a href="#about">关于我们</a>
             <a href="#achievements">实践成果</a>
+            <a href="#map">实践足迹</a>
             <a href="#timeline">实践历程</a>
             <a href="#contact">联系我们</a>
         </div>
@@ -1326,275 +858,564 @@
 
     <script>
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1500);
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500);
         });
 
         const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
 
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-        
-        function closeMenu() {
-            document.getElementById('navLinks').classList.remove('active');
-        }
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        function closeMenu() { document.getElementById('navLinks').classList.remove('active'); }
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.scroll-reveal, .timeline-item').forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.scroll-reveal, .timeline-item').forEach(el => {
-            observer.observe(el);
-        });
-
-        /* 
-         * 弹窗数据说明：
-         * gallery数组里可以有两种内容：
-         * 1. 文字占位：'图片说明'（默认显示灰色占位框）
-         * 2. 图片：<img src="images/xxx.jpg" alt="描述">
-         * 3. 视频：<video controls src="videos/xxx.mp4"></video>
-         * 
-         * 使用步骤：
-         * 1. 在仓库里新建 images 和 videos 文件夹
-         * 2. 把照片/视频上传进去
-         * 3. 把下面的 gallery 数组里的文字替换成上面的 img/video 标签
-         */
-
+        /* ==========================================
+           数据：通用成果 + 历程（单篇）
+           ========================================== */
         const modalData = [
             {
-                icon: '📊',
-                tag: '调研报告',
-                title: '乡村非遗产业发展现状深度调研',
-                colorClass: 'saffron',
-                stats: [
-                    { value: '5', label: '调研村落' },
-                    { value: '12000', label: '报告字数' },
-                    { value: '200+', label: '访谈次数' }
-                ],
-                content: `
-                    <p>团队历时15天，深入新疆、甘肃等地5个典型村落，围绕"非遗保护、产业振兴、文旅融合"三个维度展开系统调研。重点考察了喀什艾德莱斯绸、临夏砖雕等国家级非遗项目。</p>
-                    <p>通过入户访谈、工坊观察、传承人座谈等方法，我们发现非遗传承面临"后继乏人""市场狭窄""创新不足"等突出问题。针对这些问题，团队提出了"非遗+文创""非遗+文旅"融合发展策略。</p>
-                    <p>调研报告获得当地政府与文化部门高度评价，部分建议已被纳入下一年度非遗保护工作要点。</p>
-                `,
-                // 示例：把文字换成图片/视频，如下：
-                gallery: [
-                    '调研现场照片',
-                    '村民访谈',
-                    '问卷发放',
-                    '村委会座谈',
-                    '工坊考察',
-                    '数据整理'
-                    // 上传图片后改成这样：
-                    // '<img src="images/diaoyan1.jpg" alt="调研现场">',
-                    // '<img src="images/diaoyan2.jpg" alt="村民访谈">',
-                    // '<video controls src="videos/fangtan.mp4"></video>',
-                ]
+                icon: '📊', tag: '调研报告', title: '六地非遗产业发展现状深度调研', colorClass: 'saffron',
+                stats: [{ value: '6', label: '调研省区' }, { value: '18', label: '调研村落' }, { value: '300+', label: '访谈次数' }],
+                content: `<p>团队历时两个多月，深入新疆、西藏、广西、贵州、内蒙古、四川六省区，围绕"非遗保护、产业振兴、文旅融合"三个维度展开系统调研。重点考察了艾德莱斯绸、藏毯、壮锦、苗绣、蒙古族刺绣、彝族漆器等国家级非遗项目。</p>
+                          <p>通过入户访谈、工坊观察、传承人座谈等方法，我们发现非遗传承面临"后继乏人""市场狭窄""创新不足"等共性问题，也发现了各地因地制宜的保护经验。针对这些问题，团队提出了"非遗+文创""非遗+文旅""非遗+数字"融合发展策略。</p>
+                          <p>系列调研报告获得多地政府与文化部门高度评价，部分建议已被纳入下一年度非遗保护工作要点。</p>`,
+                gallery: ['调研现场照片','村民访谈','问卷发放','村委会座谈','工坊考察','数据整理']
             },
             {
-                icon: '🏺',
-                tag: '非遗寻访',
-                title: '喀什艾德莱斯绸技艺记录',
-                colorClass: 'turquoise',
-                stats: [
-                    { value: '8', label: '走访工坊' },
-                    { value: '12', label: '传承人访谈' },
-                    { value: '400+', label: '拍摄照片' }
-                ],
-                content: `
-                    <p>艾德莱斯绸是新疆维吾尔族传统丝绸，被誉为"丝路上的彩虹"。团队专程赴喀什地区，走访了8家艾德莱斯绸工坊，从缫丝、扎经染色到织造，全程记录了这一千年技艺的完整流程。</p>
-                    <p>我们访谈了12位传承人，其中最年长的已85岁，仍坚持每天坐在织机前。老人说："这手艺是祖宗传下来的，不能断在我手里。"</p>
-                    <p>团队整理了8000余字的技艺档案，拍摄了400余张照片，为这一非遗项目留下了珍贵的影像与文字资料。</p>
-                `,
-                gallery: ['织机特写', '染色工艺', '传承人访谈', '成品展示', '工坊全景', '队员学习']
+                icon: '🏺', tag: '非遗寻访', title: '多民族技艺档案记录', colorClass: 'turquoise',
+                stats: [{ value: '24', label: '走访工坊' }, { value: '45', label: '传承人访谈' }, { value: '2000+', label: '拍摄照片' }],
+                content: `<p>六地技艺，六种色彩。团队在新疆记录了艾德莱斯绸"扎经染色"的绚烂；在西藏见证了藏毯编织的厚重；在广西学习了壮锦"以棉为经，以丝为纬"的精巧；在贵州采集了苗绣"穿在身上的史书"；在内蒙古感受了蒙古族刺绣的豪放；在四川体验了彝族漆器髹饰的古朴。</p>
+                          <p>我们访谈了45位传承人，其中最年长的已88岁。每一位传承人都反复强调同一句话："这手艺是祖宗传下来的，不能断在我们手里。"</p>
+                          <p>团队整理了超过5万字的技艺档案，拍摄了2000余张照片，为六种非遗项目留下了珍贵的影像与文字资料。</p>`,
+                gallery: ['织机特写','染色工艺','传承人访谈','成品展示','工坊全景','队员学习']
             },
             {
-                icon: '🧵',
-                tag: '民族技艺',
-                title: '黔东南苗绣纹样考察',
-                colorClass: 'magenta',
-                stats: [
-                    { value: '6', label: '考察苗寨' },
-                    { value: '15', label: '绣娘访谈' },
-                    { value: '200+', label: '纹样采集' }
-                ],
-                content: `
-                    <p>苗绣是苗族妇女世代相传的刺绣技艺，被誉为"穿在身上的史书"。团队深入贵州黔东南6个苗寨，记录了平绣、辫绣、结绣等12种针法。</p>
-                    <p>我们发现，每一种纹样都有特定寓意：蝴蝶纹象征祖先，鱼纹象征繁衍，几何纹记录迁徙路线。这些纹样是苗族无文字历史的生动见证。</p>
-                    <p>团队建立了包含200余个纹样的数字化图库，并尝试用AI辅助纹样分类，为苗绣的数字化保护探索新路径。</p>
-                `,
-                gallery: ['绣娘工作', '针法记录', '纹样采集', '服饰展示', '数字化整理', '队员体验']
+                icon: '🧵', tag: '民族技艺', title: '西南民族纹样考察', colorClass: 'magenta',
+                stats: [{ value: '4', label: '考察省区' }, { value: '35', label: '匠人访谈' }, { value: '500+', label: '纹样采集' }],
+                content: `<p>苗绣、壮锦、彝漆、藏毯……每一种纹样都是一部无字的史诗。团队深入西南四省区，记录了平绣、辫绣、结绣、挑花等18种针法，采集了500余个经典纹样。</p>
+                          <p>我们发现，蝴蝶纹象征祖先，鱼纹象征繁衍，几何纹记录迁徙路线，火镰纹代表对火的崇拜。这些纹样是民族无文字历史的生动见证。</p>
+                          <p>团队建立了包含500余个纹样的数字化图库，并尝试用AI辅助纹样分类与修复，为民族纹样的数字化保护探索新路径。</p>`,
+                gallery: ['绣娘工作','针法记录','纹样采集','服饰展示','数字化整理','队员体验']
             },
             {
-                icon: '🎥',
-                tag: '影像记录',
-                title: '《织彩》民族文化纪录片',
-                colorClass: 'gold',
-                stats: [
-                    { value: '35', label: '拍摄天数' },
-                    { value: '800+', label: '素材片段' },
-                    { value: '一等奖', label: '获奖等级' }
-                ],
-                content: `
-                    <p>团队组建了由新闻与视觉艺术专业同学领衔的摄制组，全程跟拍民族文化寻访过程，累计拍摄原始素材超过400GB，最终剪辑成35分钟纪录片《织彩》。</p>
-                    <p>影片以"色彩"为主线，通过艾德莱斯的绚烂红、苗绣的靛青蓝、藏毯的庄重金，展现不同民族的文化个性与共同的精神追求。</p>
-                    <p>纪录片在校内首映时座无虚席，随后参加校级社会实践视频评比，荣获一等奖，并被推荐参加北京大学生电影节纪录片单元。</p>
-                `,
-                gallery: ['拍摄花絮', '织机特写', '刺绣近景', '染色过程', '剪辑工作', '首映现场']
+                icon: '🎥', tag: '影像记录', title: '《织彩》民族文化纪录片', colorClass: 'gold',
+                stats: [{ value: '73', label: '拍摄天数' }, { value: '1200+', label: '素材片段' }, { value: '一等奖', label: '获奖等级' }],
+                content: `<p>团队组建了由新闻与视觉艺术专业同学领衔的摄制组，全程跟拍六地民族文化寻访过程，累计拍摄原始素材超过800GB，最终剪辑成45分钟纪录片《织彩》。</p>
+                          <p>影片以"色彩"为主线，通过艾德莱斯的绚烂红、藏毯的庄重金、壮锦的瑰丽青、苗绣的靛青蓝、草原的辽阔绿、彝漆的深邃黑，展现不同民族的文化个性与共同的精神追求。</p>
+                          <p>纪录片在校内首映时座无虚席，随后参加校级社会实践视频评比，荣获一等奖，并被推荐参加北京大学生电影节纪录片单元。</p>`,
+                gallery: ['拍摄花絮','织机特写','刺绣近景','染色过程','剪辑工作','首映现场']
             },
             {
-                icon: '💡',
-                tag: '创新设计',
-                title: '民族纹样现代转译设计',
-                colorClass: 'purple',
-                stats: [
-                    { value: '18', label: '设计方案' },
-                    { value: '5', label: '打样产品' },
-                    { value: '3项', label: '专利申请' }
-                ],
-                content: `
-                    <p>团队将现代设计理念与民族纹样相结合，提取艾德莱斯、苗绣、藏毯经典元素，进行18套现代转译设计。</p>
-                    <p>"丝路新语"系列将艾德莱斯的几何纹样解构重组，应用于丝巾、帆布包；"苗岭印象"系列将苗绣纹样简化为线条插画，应用于手机壳、笔记本。</p>
-                    <p>目前已有5款产品完成打样，团队正在申请外观设计专利3项，并计划与非遗工坊合作推向市场，让民族之美走进日常。</p>
-                `,
-                gallery: ['丝巾设计', '帆布包设计', '手机壳设计', '笔记本设计', '产品打样', '团队讨论']
+                icon: '💡', tag: '创新设计', title: '民族纹样现代转译设计', colorClass: 'purple',
+                stats: [{ value: '36', label: '设计方案' }, { value: '8', label: '打样产品' }, { value: '5项', label: '专利申请' }],
+                content: `<p>团队将现代设计理念与六地民族纹样相结合，提取艾德莱斯、藏毯、壮锦、苗绣、蒙绣、彝漆经典元素，进行36套现代转译设计，命名为"山河六色"系列。</p>
+                          <p>"丝路新语"系列将艾德莱斯的几何纹样解构重组；"雪域金光"系列提取藏毯边框纹样；"苗岭印象"系列将苗绣纹样简化为线条插画；"壮乡织梦"系列以壮锦回字纹为底纹。</p>
+                          <p>目前已有8款产品完成打样，团队正在申请外观设计专利5项，并计划与六地非遗工坊合作推向市场，让民族之美走进日常。</p>`,
+                gallery: ['丝巾设计','帆布包设计','手机壳设计','笔记本设计','产品打样','团队讨论']
             },
             {
-                icon: '🌐',
-                tag: '媒体宣传',
-                title: '多平台民族文化传播矩阵',
-                colorClass: 'teal',
-                stats: [
-                    { value: '11', label: '媒体报道' },
-                    { value: '80万+', label: '全网阅读' },
-                    { value: '3个', label: '平台账号' }
-                ],
-                content: `
-                    <p>团队建立了"微信公众号+微博+短视频"三位一体的宣传矩阵，全程记录民族文化寻访点滴，发布图文推送25余篇、短视频20条。</p>
-                    <p>《我在喀什学织绸》《苗绣里的密码》《藏毯上的星空》等系列内容被中国青年报、人民日报客户端转载，全网阅读量超80万。</p>
-                    <p>团队还接受了新疆卫视、贵州电视台、云南卫视采访，新闻在三家省级频道播出，让更多人看见民族文化的多彩魅力。</p>
-                `,
-                gallery: ['推文截图', '视频数据', '采访现场', '报纸版面', '后台数据', '粉丝留言']
+                icon: '🌐', tag: '媒体宣传', title: '多平台民族文化传播矩阵', colorClass: 'teal',
+                stats: [{ value: '17', label: '媒体报道' }, { value: '150万+', label: '全网阅读' }, { value: '3个', label: '平台账号' }],
+                content: `<p>团队建立了"微信公众号+微博+短视频"三位一体的宣传矩阵，全程记录六地民族文化寻访点滴，发布图文推送40余篇、短视频35条。</p>
+                          <p>《我在喀什学织绸》《苗绣里的密码》《藏毯上的星空》《壮锦织梦》《草原绣娘》《彝漆千年》等系列内容被中国青年报、人民日报客户端转载，全网阅读量超150万。</p>
+                          <p>团队还接受了新疆卫视、西藏卫视、广西卫视、贵州电视台、内蒙古卫视、四川卫视采访，新闻在六家省级频道播出，让更多人看见民族文化的多彩魅力。</p>`,
+                gallery: ['推文截图','视频数据','采访现场','报纸版面','后台数据','粉丝留言']
             },
             {
-                icon: '📋',
-                tag: '筹备期',
-                title: '团队组建与方案设计',
-                colorClass: 'saffron',
-                stats: [
-                    { value: '18', label: '队员人数' },
-                    { value: '12', label: '筹备会议' },
-                    { value: '3', label: '调研方向' }
-                ],
-                content: `
-                    <p>2026年6月初，团队面向全校发布招募通知，经过简历筛选与面试，最终确定18名来自设计、材料、计算机、文法、经管等不同学院的队员。</p>
-                    <p>在为期三周的筹备期内，团队召开了12余次线上线下会议。我们查阅了大量民族文化文献，联系了多地文旅局与非遗保护中心，最终确定了艾德莱斯绸、苗绣、藏毯三大调研方向。</p>
-                    <p>为确保实践顺利，团队还进行了民族文化敏感性培训、调研方法培训、摄影技术培训，并提前制作了问卷、访谈提纲等调研工具。</p>
-                `,
-                gallery: ['招募海报', '面试现场', '筹备会议', '物资准备', '文化培训', '方案定稿']
+                icon: '📋', tag: '筹备期', title: '团队组建与方案设计', colorClass: 'saffron',
+                stats: [{ value: '60', label: '队员人数' }, { value: '15', label: '筹备会议' }, { value: '6', label: '调研方向' }],
+                content: `<p>2026年6月初，团队面向全校发布招募通知，经过简历筛选与面试，最终确定60名来自设计、材料、计算机、文法、经管等不同学院的队员，分为六支小队，每队10人。</p>
+                          <p>在为期三周的筹备期内，团队召开了15余次线上线下会议。我们查阅了大量民族文化文献，联系了六地文旅局与非遗保护中心，最终确定了新疆、西藏、广西、贵州、内蒙古、四川六大调研方向。</p>
+                          <p>为确保实践顺利，团队还进行了民族文化敏感性培训、调研方法培训、摄影技术培训，并提前制作了问卷、访谈提纲等调研工具。</p>`,
+                gallery: ['招募海报','面试现场','筹备会议','物资准备','文化培训','方案定稿']
             },
             {
-                icon: '🏺',
-                tag: '新疆期',
-                title: '喀什艾德莱斯绸实地调研',
-                colorClass: 'turquoise',
-                stats: [
-                    { value: '15', label: '调研天数' },
-                    { value: '8', label: '走访工坊' },
-                    { value: '12', label: '传承人访谈' }
-                ],
-                content: `
-                    <p>7月中旬，团队飞赴新疆喀什，开启了为期15天的艾德莱斯绸寻访之旅。</p>
-                    <p>每天清晨，队员们就跟随传承人来到工坊，从缫丝、扎经染色到上机织造，全程记录每一个环节。喀什的夏天炎热干燥，但队员们的热情比气温更高。</p>
-                    <p>在喀什的最后一天，一位传承人将自己织的一块艾德莱斯绸赠予团队，说："希望你们把这份美丽带给更多人。"这块绸缎如今被珍藏在学校展厅。</p>
-                `,
-                gallery: ['抵达喀什', '工坊走访', '技艺记录', '传承人访谈', '绸缎成品', '离别赠礼']
+                icon: '🚩', tag: '出征期', title: '六支小队同时出征', colorClass: 'red',
+                stats: [{ value: '60', label: '出征队员' }, { value: '6', label: '实践小队' }, { value: '1', label: '总指挥部' }],
+                content: `<p>2026年7月1日，"本心研续"社会实践团在北京科技大学举行隆重的出征仪式。校团委书记为六支小队授旗，各小队队长接过队旗，立下"寻访民族文化，讲好中国故事"的誓言。</p>
+                          <p>六支小队分别命名为：丝路织彩队（新疆）、雪域匠心队（西藏）、蜀地藏彝队（四川）、苗岭绣语队（贵州）、壮锦悠扬队（广西）、草原遗韵队（内蒙古）。每队10人，设队长1名，安全员1名。</p>
+                          <p>出征当天，六支小队从北京站、北京西站、首都机场同时出发，奔赴各自的实践地。总团在北京设立指挥部，每晚与各小队视频连线，汇总当日进展。</p>`,
+                gallery: ['出征仪式','队旗授予','物资检查','安全培训','合影留恋','路线图讲解']
             },
             {
-                icon: '🧵',
-                tag: '黔滇期',
-                title: '苗绣与藏毯考察',
-                colorClass: 'magenta',
-                stats: [
-                    { value: '20', label: '考察天数' },
-                    { value: '11', label: '考察点' },
-                    { value: '23', label: '匠人访谈' }
-                ],
-                content: `
-                    <p>8月，团队分两路赴贵州黔东南和云南迪庆，开启了为期20天的苗绣与藏毯考察。</p>
-                    <p>在贵州，队员们深入苗寨，向绣娘学习苗绣针法，记录纹样寓意。在云南藏区，队员们体验了藏毯编织，了解植物染色的奥秘。</p>
-                    <p>两路队员每晚视频连线，分享当天的收获与感动。虽然相隔千里，但对民族文化的热爱让我们紧密相连。</p>
-                `,
-                gallery: ['抵达苗寨', '绣娘教学', '纹样记录', '抵达藏区', '编织体验', '队员连线']
+                icon: '🏔️', tag: '调研期', title: '六地并行实地调研', colorClass: 'turquoise',
+                stats: [{ value: '45', label: '并行天数' }, { value: '6', label: '同步省区' }, { value: '45', label: '传承人访谈' }],
+                content: `<p>7月至8月，六支小队在各自目的地同步开展调研。新疆队在喀什老城记录艾德莱斯绸织造；西藏队在拉萨八廓街学习藏毯编织；四川队分两组赴阿坝与凉山考察羌绣与彝漆；贵州队深入西江苗寨采集苗绣纹样；广西队在龙胜体验壮锦织造；内蒙古队在呼伦贝尔草原学习蒙绣。</p>
+                          <p>尽管相隔千里，但每晚的视频连线让六支队伍紧密相连。队员们分享当天的感动与发现，互相打气，形成了"六地一心"的团队氛围。</p>
+                          <p>这段并行调研的经历，让团队深刻体会到中国民族文化的多样性与共通性——技艺不同，但对美的追求相同；语言不同，但对传承的坚守相同。</p>`,
+                gallery: ['喀什织机','拉萨藏毯','凉山彝漆','西江苗绣','龙胜壮锦','草原蒙绣']
             },
             {
-                icon: '✍️',
-                tag: '总结期',
-                title: '成果凝练与展示汇报',
-                colorClass: 'gold',
-                stats: [
-                    { value: '8', label: '调研报告' },
-                    { value: '1', label: '纪录片' },
-                    { value: '一等奖', label: '校级评比' }
-                ],
-                content: `
-                    <p>9月返校后，团队立即投入成果整理工作。我们将海量访谈录音转录、编码，运用质性研究方法进行分析，最终形成8篇高质量调研报告。</p>
-                    <p>纪录片《织彩》的剪辑历时一个月，从800多个素材片段中精选出最动人的画面。首映当晚，教室里座无虚席，当看到传承人讲述坚守故事时，不少同学红了眼眶。</p>
-                    <p>在校级社会实践评比中，团队凭借扎实的调研数据、丰富的实践形式和广泛的社会影响，荣获一等奖。我们的成果已被推荐至相关文化保护机构。</p>
-                `,
-                gallery: ['数据整理', '报告撰写', '视频剪辑', '文创设计', '首映现场', '评比答辩']
+                icon: '✍️', tag: '总结期', title: '成果凝练与展示汇报', colorClass: 'gold',
+                stats: [{ value: '12', label: '调研报告' }, { value: '1', label: '纪录片' }, { value: '一等奖', label: '校级评比' }],
+                content: `<p>9月返校后，团队立即投入成果整理工作。我们将海量访谈录音转录、编码，运用质性研究方法进行分析，最终形成12篇高质量调研报告。</p>
+                          <p>纪录片《织彩》的剪辑历时一个月，从1200多个素材片段中精选出最动人的画面。首映当晚，教室里座无虚席，当看到传承人讲述坚守故事时，不少同学红了眼眶。</p>
+                          <p>在校级社会实践评比中，团队凭借扎实的调研数据、丰富的实践形式和广泛的社会影响，荣获一等奖。我们的成果已被推荐至相关文化保护机构。</p>`,
+                gallery: ['数据整理','报告撰写','视频剪辑','文创设计','首映现场','评比答辩']
             }
         ];
 
+        /* ==========================================
+           数据：各地点多篇推文（5篇占位示例）
+           ========================================== */
+        const locationData = {
+            beijing: {
+                name: '北京', colorClass: 'red', icon: '🚩',
+                stories: [
+                    {
+                        tag: '集结出发', title: '大团小队集结 · 出征仪式',
+                        stats: [{value:'60', label:'队员人数'}, {value:'6', label:'实践小队'}, {value:'1', label:'总指挥部'}],
+                        content: `<p>2026年7月1日，"本心研续"社会实践团在北京科技大学举行隆重的出征仪式。60名队员整齐列队，六面队旗迎风飘扬。</p>
+                                  <p>校团委书记为六支小队授旗，各队队长立下"寻访民族文化，讲好中国故事"的誓言。每队10人，设队长与安全员各1名，确保实践安全有序。</p>
+                                  <p>出征当天，六支小队从北京站、北京西站、首都机场同时出发，奔赴各自的实践地。总团在北京设立指挥部，每晚与各小队视频连线。</p>`,
+                        gallery: ['出征仪式','队旗授予','物资检查','安全培训','合影留恋','路线图讲解']
+                    },
+                    {
+                        tag: '行前培训', title: '民族文化调研方法论培训',
+                        stats: [{value:'3', label:'培训天数'}, {value:'6', label:'专家讲座'}, {value:'100%', label:'考核通过'}],
+                        content: `<p>出发前，团队邀请了中央民族大学、中国社会科学院的6位专家，开展了为期3天的集中培训。</p>
+                                  <p>培训内容包括：民族文化敏感性教育（如何避免"他者化"视角）、田野调查方法（访谈技巧、观察记录、问卷设计）、摄影与摄像技术（纪实摄影伦理、短视频剪辑）、安全急救知识（高原反应、野外安全）。</p>
+                                  <p>所有队员通过考核后，方可出征。团队还编制了《民族文化调研手册》，内含六地基本情况、禁忌事项、应急联系方式等。</p>`,
+                        gallery: ['专家讲座','调研方法','摄影培训','急救演练','分组讨论','资料发放']
+                    },
+                    {
+                        tag: '物资筹备', title: '六地实践物资统筹分发',
+                        stats: [{value:'6', label:'物资套装'}, {value:'120', label:'调研问卷'}, {value:'12', label:'摄影设备'}],
+                        content: `<p>团队为六支小队分别准备了标准化实践物资包，包括：调研问卷120份/队、录音笔、高清摄像机、三脚架、急救药品包、队服队旗等。</p>
+                                  <p>针对各地不同环境，还准备了差异化物资：新疆队配备防晒用品与防暑药品；西藏队配备高原反应药物与氧气瓶；内蒙古队配备防蚊虫用品与草原导航设备。</p>
+                                  <p>物资分发仪式在出征前一天举行，各队队长逐一核对清单，确保万无一失。</p>`,
+                        gallery: ['物资清单','分装现场','设备检查','药品配备','队服发放','装箱打包']
+                    },
+                    {
+                        tag: '团队建设', title: '跨学科团队融合训练',
+                        stats: [{value:'60', label:'参与队员'}, {value:'10', label:'破冰游戏'}, {value:'6', label:'协作任务'}],
+                        content: `<p>来自设计、材料、计算机、文法、经管等不同学院的60名队员，在出征前进行了为期2天的团队融合训练。</p>
+                                  <p>通过"民族文化知识竞赛""非遗技艺模拟体验""跨学科课题研讨"等活动，队员们迅速打破专业壁垒，建立了深厚的团队默契。</p>
+                                  <p>训练结束时，每支小队都制定了专属的队规与口号，并设计了小队Logo，团队凝聚力显著提升。</p>`,
+                        gallery: ['破冰游戏','知识竞赛','模拟体验','课题研讨','队规制定','Logo设计']
+                    },
+                    {
+                        tag: '后勤保障', title: '北京总指挥部运转纪实',
+                        stats: [{value:'45', label:'值班天数'}, {value:'270', label:'视频连线'}, {value:'100%', label:'安全归队'}],
+                        content: `<p>北京总指挥部由指导教师与3名留守队员组成，负责六支小队的统筹协调与安全保障。</p>
+                                  <p>每晚21:00，总指挥部与各小队进行视频连线，汇总当日调研进展、解决突发问题、协调媒体宣传。45天内共完成270次视频连线，无一次中断。</p>
+                                  <p>总指挥部还建立了"日报"制度，每晚整理六地实践简报，通过公众号向全校师生推送，让更多人实时关注实践动态。</p>`,
+                        gallery: ['指挥部全景','视频连线','日报整理','简报推送','应急协调','安全监控']
+                    }
+                ]
+            },
+            xinjiang: {
+                name: '新疆', colorClass: 'saffron', icon: '🏜️',
+                stories: [
+                    {
+                        tag: '新疆实践', title: '新疆 · 丝路织彩',
+                        stats: [{value:'15', label:'实践天数'}, {value:'3', label:'调研地点'}, {value:'2项', label:'重点非遗'}],
+                        content: `<p><strong>实践时间：</strong>2026年7月5日 — 7月20日</p>
+                                  <p><strong>实践地点：</strong>喀什市、吐鲁番市、乌鲁木齐</p>
+                                  <p><strong>走访民族：</strong>维吾尔族</p>
+                                  <p>10名队员以喀什为重心，走访了3家艾德莱斯绸非遗工坊与2个十二木卡姆传承点。在喀什老城，队员们跟随第五代传承人阿卜杜师傅，完整记录了艾德莱斯绸"经线扎染、纬线单色"的独特工艺。</p>
+                                  <p>在吐鲁番，团队考察了维吾尔族花毡与土印花布技艺。在乌鲁木齐，团队与新疆艺术学院专家座谈，探讨了非遗数字化保护路径。</p>`,
+                        gallery: ['喀什古城','织机特写','扎经染色','传承人访谈','艾德莱斯成品','团队合影']
+                    },
+                    {
+                        tag: '深度访谈', title: '喀什老城的织绸人',
+                        stats: [{value:'8', label:'访谈匠人'}, {value:'3代', label:'传承谱系'}, {value:'50年', label:'织龄最长'}],
+                        content: `<p>在喀什老城的高台民居，我们找到了艾德莱斯绸织造技艺的第五代传承人阿卜杜热依木师傅。他的家族从曾祖父开始织绸，至今已有120余年历史。</p>
+                                  <p>阿卜杜师傅向我们展示了"扎经染色"的核心技艺：将经线按图案要求分段扎紧，浸入不同颜色的染料中，形成自然的色晕过渡。这种技艺全凭经验，没有图纸，图案全在匠人心中。</p>
+                                  <p>最让我们感动的是，阿卜杜师傅说："我不担心手艺失传，我担心的是年轻人不愿意花十年时间去学这一门手艺。"</p>`,
+                        gallery: ['高台民居','经线扎结','染色池','匠人双手','家族老照片','队员记录']
+                    },
+                    {
+                        tag: '技艺记录', title: '艾德莱斯绸染色工艺全记录',
+                        stats: [{value:'12', label:'染色步骤'}, {value:'8', label:'天然染料'}, {value:'400+', label:'拍摄张数'}],
+                        content: `<p>团队用镜头完整记录了艾德莱斯绸的染色全流程。从蚕茧抽丝、纺线、整经，到扎结、浸染、晾干、穿纬、上机织造，共涉及72道工序。</p>
+                                  <p>染料全部来自天然：靛蓝来自板蓝根，红色来自茜草，黄色来自槐花，棕色来自核桃皮。这些植物染料不仅环保，而且随着时间的推移，颜色会愈发温润。</p>
+                                  <p>团队制作了《艾德莱斯绸技艺图谱》电子档案，已捐赠给喀什市非遗保护中心。</p>`,
+                        gallery: ['蚕茧抽丝','纺线过程','扎结特写','浸染瞬间','晾干架','成品展示']
+                    },
+                    {
+                        tag: '队员日记', title: '丝路织彩队队员实践日记',
+                        stats: [{value:'10', label:'队员人数'}, {value:'15', label:'日记篇数'}, {value:'3万', label:'总字数'}],
+                        content: `<p><strong>队员张同学：</strong>"第一次坐在织机前，才知道艾德莱斯绸不是'织'出来的，是'染'出来的。经线扎染的精度要求极高，稍有偏差整匹绸就废了。传承人阿姨说，她16岁开始学，30岁才敢独立上机。"</p>
+                                  <p><strong>队员李同学：</strong>"喀什的夏天很热，但匠人们的热情更炽热。一位老爷爷把自己织了三个月的绸缎送给我们，说'希望你们把这份美丽带给更多人'。那块绸缎现在还在学校展厅里。"</p>
+                                  <p>10名队员每人撰写了实践日记，累计3万余字，记录了最真实的田野感受。</p>`,
+                        gallery: ['队员织机体验','匠人指导','绸缎赠品','日记手稿','团队讨论','离别合影']
+                    },
+                    {
+                        tag: '成果产出', title: '新疆段调研报告与影像档案',
+                        stats: [{value:'2', label:'调研报告'}, {value:'800+', label:'照片素材'}, {value:'1', label:'短视频'}],
+                        content: `<p>新疆小队完成了《艾德莱斯绸产业发展现状调研报告》与《维吾尔族非遗技艺传承困境与对策》两篇高质量报告，共计2.5万字。</p>
+                                  <p>影像方面，拍摄了800余张照片、12小时访谈录像、1条15分钟纪录片短片《丝路织彩》。短片记录了从蚕茧到成品的完整过程，以及传承人的坚守故事。</p>
+                                  <p>团队还协助喀什市文旅局完善了非遗工坊游客导览手册，为当地文旅融合提供了青年智慧。</p>`,
+                        gallery: ['报告封面','数据分析','访谈录像','短片截图','导览手册','成果汇报']
+                    }
+                ]
+            },
+            tibet: {
+                name: '西藏', colorClass: 'turquoise', icon: '🏔️',
+                stories: [
+                    {
+                        tag: '西藏实践', title: '西藏 · 雪域匠心',
+                        stats: [{value:'12', label:'实践天数'}, {value:'2', label:'调研城市'}, {value:'2项', label:'重点非遗'}],
+                        content: `<p><strong>实践时间：</strong>2026年7月22日 — 8月3日</p>
+                                  <p><strong>实践地点：</strong>拉萨市、日喀则市</p>
+                                  <p><strong>走访民族：</strong>藏族</p>
+                                  <p>10名队员在拉萨八廓街走访了4家藏毯工坊。藏毯以羊毛为原料，经纺纱、染色、织造、平剪、洗毯等数十道工序方能完成。队员们亲自体验了"8字扣"编织技法。</p>
+                                  <p>在日喀则，团队考察了藏族唐卡艺术，记录了矿物颜料的制作配方——朱砂、石青、石绿、雄黄。</p>`,
+                        gallery: ['布达拉宫','藏毯工坊','编织体验','唐卡绘制','矿物颜料','团队合影']
+                    },
+                    {
+                        tag: '匠人故事', title: '八廓街的藏毯守护者',
+                        stats: [{value:'4', label:'走访工坊'}, {value:'6', label:'匠人访谈'}, {value:'30年', label:'平均织龄'}],
+                        content: `<p>在拉萨八廓街深处，我们找到了"雪域藏毯"工坊的负责人次仁卓嘎大姐。她从16岁开始学织毯，如今已经织了34年。</p>
+                                  <p>次仁大姐向我们展示了藏毯的核心技艺"8字扣"：每打一个结，都要将毛线绕成8字形，拉紧后用刀切断。一平方米藏毯要打上10万个结，一个熟练匠人一天只能织出巴掌大的一块。</p>
+                                  <p>她说："织毯的时候不能急，心要静。每一根线都要系紧，就像我们对生活的态度一样。"</p>`,
+                        gallery: ['八廓街景','织机全景','8字扣特写','匠人手部','羊毛原料','成品挂毯']
+                    },
+                    {
+                        tag: '高原挑战', title: '雪域匠心队的高原适应记',
+                        stats: [{value:'10', label:'队员人数'}, {value:'3650', label:'平均海拔(m)'}, {value:'100%', label:'适应成功'}],
+                        content: `<p>10名队员初到拉萨，都经历了不同程度的高原反应。头痛、失眠、食欲不振……但没有人退缩。</p>
+                                  <p>团队制定了科学的适应计划：第一天充分休息，第二天轻度活动，第三天开始调研。队医随身携带血氧仪，每天早晚监测队员身体状况。</p>
+                                  <p>令人感动的是，当地匠人得知我们来自北京，特意准备了酥油茶和青稞酒，用藏族最隆重的礼节欢迎我们。这份热情，让高原的寒冷瞬间消散。</p>`,
+                        gallery: ['抵达拉萨','高原反应','血氧监测','酥油茶招待','青稞酒仪式','适应训练']
+                    },
+                    {
+                        tag: '唐卡艺术', title: '日喀则唐卡：笔尖上的信仰',
+                        stats: [{value:'3', label:'画师访谈'}, {value:'12', label:'矿物颜料'}, {value:'72', label:'绘制工序'}],
+                        content: `<p>在日喀则桑珠孜区，我们拜访了唐卡画师次仁师傅。他的工作室不足20平米，墙上挂满了正在绘制和已经完成的唐卡。</p>
+                                  <p>次仁师傅向我们展示了唐卡颜料的制作：朱砂研磨成粉、石青反复淘洗、雄黄与胶水调和……每一种颜料都要经过7天以上的制备。他说："矿物颜料千年不褪色，因为它们是大地的心脏。"</p>
+                                  <p>一幅中等大小的唐卡，需要画师连续工作3个月。次仁师傅正在绘制的一幅《六道轮回图》，已经画了8个月。</p>`,
+                        gallery: ['工作室外景','颜料研磨','石青淘洗','绘制过程','六道轮回图','画师合影']
+                    },
+                    {
+                        tag: '成果产出', title: '西藏段调研报告与影像档案',
+                        stats: [{value:'2', label:'调研报告'}, {value:'600+', label:'照片素材'}, {value:'1', label:'纪录片'}],
+                        content: `<p>西藏小队完成了《藏毯技艺传承与产业发展调研报告》与《唐卡艺术数字化保护路径研究》两篇报告，共计2.2万字。</p>
+                                  <p>影像方面，拍摄了600余张照片、10小时访谈录像、1条12分钟纪录片短片《雪域匠心》。短片以"8字扣"为线索，讲述了藏毯匠人的坚守与传承。</p>
+                                  <p>团队还协助拉萨市非遗保护中心建立了藏毯纹样数字档案，为后续的研究与开发提供了基础数据。</p>`,
+                        gallery: ['报告封面','数据分析','访谈录像','短片截图','数字档案','成果汇报']
+                    }
+                ]
+            },
+            sichuan: {
+                name: '四川', colorClass: 'indigo', icon: '🐼',
+                stories: [
+                    {
+                        tag: '四川实践', title: '四川 · 蜀地藏彝',
+                        stats: [{value:'12', label:'实践天数'}, {value:'3', label:'调研区域'}, {value:'3项', label:'重点非遗'}],
+                        content: `<p><strong>实践时间：</strong>2026年8月5日 — 8月17日</p>
+                                  <p><strong>实践地点：</strong>成都市、阿坝州（理县、茂县）、凉山州（西昌、昭觉）</p>
+                                  <p><strong>走访民族：</strong>彝族、藏族、羌族</p>
+                                  <p>10名队员在凉山彝族自治州深入昭觉县彝族村寨，记录了彝族漆器髹饰技艺。在阿坝州理县，团队考察了羌绣与藏羌碉楼。</p>`,
+                        gallery: ['彝族漆器','髹饰体验','羌绣挑花','碉楼测绘','西昌火把节','团队合影']
+                    },
+                    {
+                        tag: '技艺探秘', title: '彝族漆器：黑珍珠的诞生',
+                        stats: [{value:'32', label:'髹漆工序'}, {value:'3', label:'主色调'}, {value:'1000+', label:'历史年份'}],
+                        content: `<p>在昭觉县彝族漆器传习所，我们见证了"黑珍珠"的诞生全过程。漆器选用当地特产的紫荆木作胎，表面涂抹彝族地区特有的土漆。</p>
+                                  <p>最神奇的是"彩绘"环节：匠人用竹签蘸取朱砂、石黄等矿物颜料，在黑色漆面上绘制出日月、山川、动物等图案。这些图案不是装饰，而是彝族图腾信仰的体现。</p>
+                                  <p>团队记录了完整的32道工序，并尝试用3D扫描技术对经典器型进行数字化存档。</p>`,
+                        gallery: ['紫荆木胎','土漆采集','髹漆过程','彩绘细节','打磨抛光','成品展示']
+                    },
+                    {
+                        tag: '羌绣体验', title: '理县羌绣：心手相应的绝技',
+                        stats: [{value:'5', label:'绣娘访谈'}, {value:'12', label:'记录针法'}, {value:'3座', label:'碉楼测绘'}],
+                        content: `<p>在理县桃坪羌寨，我们遇到了72岁的绣娘王奶奶。她向我们展示了羌绣"十字挑花"的绝技——不打样、不画线，全凭心中构图。</p>
+                                  <p>王奶奶说："羌绣是心里的花，想绣什么，手上自然就出来了。"她现场为我们绣了一朵羊角花，仅用20分钟，线条流畅、配色和谐。</p>
+                                  <p>团队还协助当地完成了3座碉楼的测绘工作，为羌族建筑文化遗产保护贡献了力量。</p>`,
+                        gallery: ['桃坪羌寨','绣娘工作','十字挑花','羊角花成品','碉楼测绘','队员学习']
+                    },
+                    {
+                        tag: '火把节', title: '西昌火把节：烈焰中的民族狂欢',
+                        stats: [{value:'10', label:'队员参与'}, {value:'3万', label:'参与群众'}, {value:'1', label:'篝火晚会'}],
+                        content: `<p>实践期间恰逢西昌火把节，10名队员有幸参与了这一盛大的民族节日。火把节是彝族最重要的传统节日，象征着驱邪祈福、庆祝丰收。</p>
+                                  <p>傍晚时分，广场上点燃了巨大的篝火，彝族同胞们手拉手跳起达体舞。队员们也加入其中，虽然舞步生疏，但热情丝毫不减。</p>
+                                  <p>一位彝族大叔对我们说："火把节不只是我们的节日，是所有热爱生活的人的节日。"这句话让我们深刻理解了民族文化的包容与开放。</p>`,
+                        gallery: ['火把准备','点火仪式','达体舞会','篝火狂欢','队员参与','星空下的火把']
+                    },
+                    {
+                        tag: '成果产出', title: '四川段调研报告与影像档案',
+                        stats: [{value:'3', label:'调研报告'}, {value:'700+', label:'照片素材'}, {value:'2', label:'短视频'}],
+                        content: `<p>四川小队完成了《彝族漆器技艺传承调研报告》《羌绣活态保护现状研究》《藏羌碉楼建筑文化考察报告》三篇报告，共计3万字。</p>
+                                  <p>影像方面，拍摄了700余张照片、15小时访谈录像、2条短视频《黑珍珠的诞生》《心手相应》。</p>
+                                  <p>团队还协助昭觉县文旅局设计了彝族漆器文创产品方案，为非遗产业化提供了青年视角。</p>`,
+                        gallery: ['报告封面','数据分析','访谈录像','短片截图','文创设计','成果汇报']
+                    }
+                ]
+            },
+            guizhou: {
+                name: '贵州', colorClass: 'magenta', icon: '🌸',
+                stories: [
+                    {
+                        tag: '贵州实践', title: '贵州 · 苗岭绣语',
+                        stats: [{value:'14', label:'实践天数'}, {value:'4', label:'考察村寨'}, {value:'3项', label:'重点非遗'}],
+                        content: `<p><strong>实践时间：</strong>2026年8月6日 — 8月20日</p>
+                                  <p><strong>实践地点：</strong>黔东南州凯里市、雷山县（西江苗寨）、从江县、台江县</p>
+                                  <p><strong>走访民族：</strong>苗族、侗族</p>
+                                  <p>10名队员以西江千户苗寨为基地，深入4个苗寨考察苗绣。队员们记录了破线绣、绉绣、缠绣等15种针法，访谈了18位绣娘。</p>`,
+                        gallery: ['西江苗寨','绣娘教学','针法记录','侗族大歌','百年嫁衣','团队合影']
+                    },
+                    {
+                        tag: '纹样密码', title: '苗绣：穿在身上的史书',
+                        stats: [{value:'15', label:'记录针法'}, {value:'200+', label:'采集纹样'}, {value:'3代', label:'最老绣品'}],
+                        content: `<p>龙奶奶的嫁衣是团队此行最大的惊喜。这件嫁衣绣了整整8年，上面的蝴蝶纹象征祖先蚩尤，鱼龙纹象征繁衍，几何纹记录了苗族从黄河流域迁徙到西南的路线图。</p>
+                                  <p>龙奶奶说："我们苗家没有文字，历史都绣在衣服上。女儿出嫁时，母亲会把绣好的衣服传给她，一代一代，就不会忘本。"</p>
+                                  <p>团队对这件嫁衣进行了高清影像记录，并建立了3D纹样数据库。</p>`,
+                        gallery: ['龙奶奶家','嫁衣全貌','蝴蝶纹特写','鱼龙纹细节','绣娘手部','队员学习']
+                    },
+                    {
+                        tag: '侗族大歌', title: '从江侗族大歌：清泉般闪光的音乐',
+                        stats: [{value:'3', label:'歌队访谈'}, {value:'8', label:'记录曲目'}, {value:'1', label:'歌会参与'}],
+                        content: `<p>在从江县小黄村，我们聆听了侗族大歌——一种多声部、无指挥、无伴奏的民间合唱形式。2009年，侗族大歌被列入联合国人类非物质文化遗产代表作名录。</p>
+                                  <p>村里的"月也"歌队为我们演唱了《蝉之歌》《大山真美好》等经典曲目。歌声清澈如山泉，多声部交织如天籁。队员们虽然听不懂侗语，但完全被音乐的力量所震撼。</p>
+                                  <p>歌队队长告诉我们："侗族大歌不是唱给别人听的，是唱给祖先听的，唱给山水听的。"</p>`,
+                        gallery: ['小黄村景','歌队排练','鼓楼对歌','月也歌会','队员聆听','歌队合影']
+                    },
+                    {
+                        tag: '银饰锻造', title: '台江银饰：火与锤的舞蹈',
+                        stats: [{value:'4', label:'银匠访谈'}, {value:'18', label:'记录工序'}, {value:'50年', label:'最长匠龄'}],
+                        content: `<p>在台江县施洞镇，我们拜访了苗族银饰锻造技艺传承人吴师傅。他的工作坊里，炉火终年不熄，锤声日夜不停。</p>
+                                  <p>吴师傅向我们展示了银饰锻造的全过程：熔银、锻打、拉丝、编丝、焊接、抛光……一件复杂的银冠需要经过200多道工序，耗时3个月。</p>
+                                  <p>最令人惊叹的是"拉丝"技艺：将银块拉成直径0.2毫米的细丝，比头发还细。吴师傅说："这双手拉了50年银丝，闭上眼睛都能拉出一样细的。"</p>`,
+                        gallery: ['工作坊外景','熔银过程','锻打特写','拉丝技艺','编丝细节','银冠成品']
+                    },
+                    {
+                        tag: '成果产出', title: '贵州段调研报告与影像档案',
+                        stats: [{value:'3', label:'调研报告'}, {value:'900+', label:'照片素材'}, {value:'2', label:'纪录片'}],
+                        content: `<p>贵州小队完成了《苗绣纹样数字化保护研究》《侗族大歌传承现状调研》《苗族银饰锻造技艺考察报告》三篇报告，共计3.2万字。</p>
+                                  <p>影像方面，拍摄了900余张照片、18小时访谈录像、2条纪录片《穿在身上的史书》《清泉之歌》。</p>
+                                  <p>团队还协助雷山县非遗中心建立了苗绣纹样数据库，收录了200余个经典纹样，为后续的设计开发提供了宝贵资源。</p>`,
+                        gallery: ['报告封面','数据分析','访谈录像','短片截图','纹样数据库','成果汇报']
+                    }
+                ]
+            },
+            guangxi: {
+                name: '广西', colorClass: 'teal', icon: '🎋',
+                stories: [
+                    {
+                        tag: '广西实践', title: '广西 · 壮锦悠扬',
+                        stats: [{value:'10', label:'实践天数'}, {value:'3', label:'调研城市'}, {value:'2项', label:'重点非遗'}],
+                        content: `<p><strong>实践时间：</strong>2026年8月8日 — 8月18日</p>
+                                  <p><strong>实践地点：</strong>南宁市、柳州市（三江）、桂林市（龙胜）</p>
+                                  <p><strong>走访民族：</strong>壮族、侗族</p>
+                                  <p>10名队员在南宁参观了广西民族博物馆，系统学习了壮锦的历史与纹样体系。在桂林龙胜，队员们向壮族织娘学习了12种经典纹样。</p>`,
+                        gallery: ['民族博物馆','壮锦织机','通经断纬','龙脊梯田','铜鼓文化','团队合影']
+                    },
+                    {
+                        tag: '织锦体验', title: '壮锦：通经断纬的智慧',
+                        stats: [{value:'12', label:'经典纹样'}, {value:'72', label:'织造工序'}, {value:'4', label:'织娘访谈'}],
+                        content: `<p>在龙胜县壮锦传习馆，74岁的织娘黄阿姨向我们展示了"通经断纬"的绝技。这种织法需要织娘在脑海中记住整幅图案的配色，每织一行就要换一次纬线颜色。</p>
+                                  <p>黄阿姨说："壮锦不能急，一天只能织几寸。但织出来的东西，用几十年都不会坏。"</p>
+                                  <p>团队记录了壮锦从采棉、纺纱、染线、上机到织造的72道工序，并尝试将壮锦纹样与现代家居设计结合。</p>`,
+                        gallery: ['传习馆外景','纺纱过程','染线晾晒','上机织造','纹样特写','成品展示']
+                    },
+                    {
+                        tag: '龙脊梯田', title: '龙脊梯田：大地上的壮锦',
+                        stats: [{value:'10', label:'队员徒步'}, {value:'800', label:'梯田层数'}, {value:'2300', label:'历史年份'}],
+                        content: `<p>实践期间，10名队员徒步登上了龙脊梯田。站在山顶俯瞰，层层叠叠的梯田如波浪般起伏，宛如一幅巨大的壮锦铺展在大地上。</p>
+                                  <p>当地壮族村民告诉我们，龙脊梯田已有2300多年历史，是壮族祖先用简陋的工具一锄一锄开垦出来的。每年春耕时节，村民们在梯田中插秧，水面倒映着蓝天白云，美不胜收。</p>
+                                  <p>队员们用无人机航拍了梯田全景，并记录了壮族"稻作文化"与"那文化"的深厚内涵。</p>`,
+                        gallery: ['梯田全景','春耕插秧','水面倒影','无人机航拍','壮族村落','队员徒步']
+                    },
+                    {
+                        tag: '侗族鼓楼', title: '三江鼓楼：不用一钉一铆的建筑奇迹',
+                        stats: [{value:'3', label:'鼓楼考察'}, {value:'0', label:'使用铁钉'}, {value:'100%', label:'榫卯结构'}],
+                        content: `<p>在三江侗族自治县，我们考察了侗族鼓楼——一种完全采用榫卯结构、不用一钉一铆的木质建筑。最高的鼓楼有20余层，高达40多米。</p>
+                                  <p>侗族建筑师杨师傅向我们展示了鼓楼的建造原理：所有木构件通过精确的榫卯连接，结构稳固，抗震性能极佳。他说："鼓楼是侗族人的心脏，村里有事都在鼓楼里商量。"</p>
+                                  <p>团队对3座代表性鼓楼进行了测绘与摄影记录，并尝试用BIM技术建立三维模型。</p>`,
+                        gallery: ['鼓楼全景','榫卯结构','内部彩绘','建筑师访谈','测绘工作','三维模型']
+                    },
+                    {
+                        tag: '成果产出', title: '广西段调研报告与影像档案',
+                        stats: [{value:'2', label:'调研报告'}, {value:'600+', label:'照片素材'}, {value:'2', label:'短视频'}],
+                        content: `<p>广西小队完成了《壮锦技艺传承与产业创新调研报告》《侗族建筑文化遗产保护研究》两篇报告，共计2.3万字。</p>
+                                  <p>影像方面，拍摄了600余张照片、10小时访谈录像、2条短视频《通经断纬》《大地壮锦》。</p>
+                          <p>团队还协助龙胜县设计了壮锦文创产品系列，包括丝巾、抱枕、手机壳等，为非遗产业化提供了设计方案。</p>`,
+                        gallery: ['报告封面','数据分析','访谈录像','短片截图','文创设计','成果汇报']
+                    }
+                ]
+            },
+            neimenggu: {
+                name: '内蒙古', colorClass: 'gold', icon: '🐎',
+                stories: [
+                    {
+                        tag: '内蒙古实践', title: '内蒙古 · 草原遗韵',
+                        stats: [{value:'10', label:'实践天数'}, {value:'2', label:'调研区域'}, {value:'2项', label:'重点非遗'}],
+                        content: `<p><strong>实践时间：</strong>2026年8月12日 — 8月22日</p>
+                                  <p><strong>实践地点：</strong>呼和浩特市、呼伦贝尔市（陈巴尔虎旗）</p>
+                                  <p><strong>走访民族：</strong>蒙古族</p>
+                                  <p>10名队员在呼和浩特走访了蒙古族刺绣传承人，学习了"盘绣""贴绣""堆绣"等5种针法。在呼伦贝尔草原，团队考察了马头琴制作技艺。</p>`,
+                        gallery: ['草原风光','蒙古刺绣','马头琴制作','搏克体验','那达慕现场','团队合影']
+                    },
+                    {
+                        tag: '草原之声', title: '马头琴：草原的灵魂',
+                        stats: [{value:'72', label:'制作工序'}, {value:'2', label:'制琴大师'}, {value:'300年', label:'传承历史'}],
+                        content: `<p>在陈巴尔虎旗，我们找到了马头琴制作大师巴图师傅。他的家族从曾祖父开始制作马头琴，至今已有300余年历史。</p>
+                                  <p>巴图师傅向我们展示了选料的讲究：琴杆要用色木，因为纹理细密不易变形；共鸣箱要用枫木，因为音色浑厚；琴弦要用马尾，因为韧性好、音色纯正。</p>
+                                  <p>最让我们震撼的是" carve 马头"环节：巴图师傅仅凭一把小刀，就能在半小时内 carve 出栩栩如生的马头。他说："马头琴不只是乐器，它是草原的灵魂。"</p>`,
+                        gallery: ['选材现场',' carve 琴杆',' carve 马头','蒙皮工艺','调音试奏','成品展示']
+                    },
+                    {
+                        tag: '那达慕', title: '草原那达慕：力与美的盛宴',
+                        stats: [{value:'10', label:'队员参与'}, {value:'5', label:'比赛项目'}, {value:'1', label:'搏克冠军'}],
+                        content: `<p>实践期间恰逢陈巴尔虎旗那达慕大会，10名队员全程参与了这一草原盛会。那达慕是蒙古族传统节日，以摔跤、赛马、射箭"男儿三艺"为核心。</p>
+                                  <p>队员们体验了搏克（蒙古式摔跤）、骑马、射箭等项目。虽然技术生疏，但草原人民的热情让我们倍感温暖。一位摔跤手说："摔倒了再站起来，才是草原汉子的本色。"</p>
+                                  <p>那达慕的开幕式上万马奔腾，马蹄声震耳欲聋，场面极其壮观。队员们用镜头记录下了这一生难忘的画面。</p>`,
+                        gallery: ['那达慕开幕','万马奔腾','搏克比赛','骑马体验','射箭练习','颁奖仪式']
+                    },
+                    {
+                        tag: '蒙绣体验', title: '蒙古族刺绣：马背上的针线艺术',
+                        stats: [{value:'5', label:'记录针法'}, {value:'8', label:'绣娘访谈'}, {value:'50+', label:'纹样采集'}],
+                        content: `<p>在呼和浩特，我们拜访了蒙古族刺绣传承人萨仁娜阿姨。她的刺绣风格与南方绣娘截然不同：针脚粗犷有力，配色浓烈大胆，图案多为云纹、卷草、龙凤。</p>
+                                  <p>萨仁娜阿姨说："蒙绣是马背上的艺术，要经得起颠簸，所以针脚要密、线要粗。我们蒙古人喜欢鲜艳的颜色，因为草原太大了，鲜艳的颜色让人心里暖和。"</p>
+                                  <p>队员们学习了5种蒙古族刺绣针法，采集了50余个经典纹样，并尝试将蒙绣元素与现代服装设计结合。</p>`,
+                        gallery: ['绣娘工作','针法记录','纹样采集','配色特点','队员体验','设计草图']
+                    },
+                    {
+                        tag: '成果产出', title: '内蒙古段调研报告与影像档案',
+                        stats: [{value:'2', label:'调研报告'}, {value:'500+', label:'照片素材'}, {value:'2', label:'纪录片'}],
+                        content: `<p>内蒙古小队完成了《蒙古族刺绣技艺传承调研报告》《马头琴制作技艺考察与数字化保护研究》两篇报告，共计2.1万字。</p>
+                                  <p>影像方面，拍摄了500余张照片、12小时访谈录像、2条纪录片《草原的灵魂》《马背上的针线》。</p>
+                                  <p>团队还协助陈巴尔虎旗文旅局设计了"草原非遗体验游"线路方案，为当地文旅融合提供了创新思路。</p>`,
+                        gallery: ['报告封面','数据分析','访谈录像','短片截图','旅游线路','成果汇报']
+                    }
+                ]
+            }
+        };
+
+        /* ==========================================
+           弹窗逻辑（支持单篇 + 地点多篇切换）
+           ========================================== */
+        let currentLocation = null;
+        let currentStoryIndex = 0;
+        let isLocationMode = false;
+
         function openModal(index) {
+            isLocationMode = false;
             const data = modalData[index];
+            renderModalContent(data);
+            document.getElementById('modalPrev').style.display = 'none';
+            document.getElementById('modalNext').style.display = 'none';
+            document.getElementById('modalDots').innerHTML = '';
+            document.getElementById('storyList').innerHTML = '';
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openLocationModal(locationKey, storyIndex = 0) {
+            isLocationMode = true;
+            currentLocation = locationKey;
+            currentStoryIndex = storyIndex;
+            renderLocationStory();
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function renderLocationStory() {
+            const loc = locationData[currentLocation];
+            const story = loc.stories[currentStoryIndex];
+            const data = {
+                icon: loc.icon,
+                tag: story.tag,
+                title: story.title,
+                colorClass: loc.colorClass,
+                stats: story.stats,
+                content: story.content,
+                gallery: story.gallery
+            };
+            renderModalContent(data);
+
+            const prevBtn = document.getElementById('modalPrev');
+            const nextBtn = document.getElementById('modalNext');
+            prevBtn.style.display = loc.stories.length > 1 ? 'flex' : 'none';
+            nextBtn.style.display = loc.stories.length > 1 ? 'flex' : 'none';
+            prevBtn.classList.toggle('disabled', currentStoryIndex === 0);
+            nextBtn.classList.toggle('disabled', currentStoryIndex === loc.stories.length - 1);
+
+            // Dots
+            document.getElementById('modalDots').innerHTML = loc.stories.map((_, i) =>
+                `<button class="modal-dot ${i === currentStoryIndex ? 'active' : ''}" onclick="jumpToStory(${i})"></button>`
+            ).join('');
+
+            // Story list
+            const listContainer = document.getElementById('storyList');
+            listContainer.innerHTML = `
+                <div class="story-list-title">本地点文章 (${currentStoryIndex + 1}/${loc.stories.length})</div>
+                ${loc.stories.map((s, i) => `
+                    <div class="story-item ${i === currentStoryIndex ? 'active' : ''}" onclick="jumpToStory(${i})">
+                        ${s.title}
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function renderModalContent(data) {
             const hero = document.getElementById('modalHero');
             hero.className = 'modal-hero ' + data.colorClass;
             hero.textContent = data.icon;
-            
+
             document.getElementById('modalTag').textContent = data.tag;
             document.getElementById('modalTitle').textContent = data.title;
-            
-            const statsHtml = data.stats.map(s => `
+
+            document.getElementById('modalStats').innerHTML = data.stats.map(s => `
                 <div class="modal-stat">
                     <div class="modal-stat-value">${s.value}</div>
                     <div class="modal-stat-label">${s.label}</div>
                 </div>
             `).join('');
-            document.getElementById('modalStats').innerHTML = statsHtml;
-            
+
             document.getElementById('modalContent').innerHTML = data.content;
-            
-            // 支持图片/视频和文字占位
-            const galleryHtml = data.gallery.map(g => {
-                // 如果g以<开头，说明是HTML标签（img/video），直接插入
-                if (g.trim().startsWith('<')) {
-                    return `<div class="modal-gallery-item">${g}</div>`;
-                }
-                // 否则显示文字占位
+
+            document.getElementById('modalGallery').innerHTML = data.gallery.map(g => {
+                if (g.trim().startsWith('<')) return `<div class="modal-gallery-item">${g}</div>`;
                 return `<div class="modal-gallery-item">${g}</div>`;
             }).join('');
-            document.getElementById('modalGallery').innerHTML = galleryHtml;
-            
-            document.getElementById('modalOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
+        }
+
+        function changeStory(dir) {
+            if (!isLocationMode) return;
+            const loc = locationData[currentLocation];
+            const newIndex = currentStoryIndex + dir;
+            if (newIndex >= 0 && newIndex < loc.stories.length) {
+                currentStoryIndex = newIndex;
+                renderLocationStory();
+            }
+        }
+
+        function jumpToStory(index) {
+            if (!isLocationMode) return;
+            currentStoryIndex = index;
+            renderLocationStory();
         }
 
         function closeModal(e) {
             if (e && e.target !== e.currentTarget) return;
             document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = '';
+            isLocationMode = false;
+            currentLocation = null;
+            currentStoryIndex = 0;
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') changeStory(-1);
+            if (e.key === 'ArrowRight') changeStory(1);
         });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const modal = document.querySelector('.modal');
+        modal.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+        modal.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 60) changeStory(1);
+            if (touchEndX - touchStartX > 60) changeStory(-1);
+        }, {passive: true});
     </script>
 
 </body>
