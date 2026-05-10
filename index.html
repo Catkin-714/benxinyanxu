@@ -13,10 +13,15 @@
         }
 
         :root {
-            --ustb-blue: #004098;
-            --ustb-red: #C20E0E;
-            --dark: #0a0e27;
-            --light: #f8fafc;
+            --primary: #2d5a3d;
+            --primary-light: #3d7a55;
+            --accent: #6b8e5a;
+            --accent-warm: #8b7355;
+            --warm-bg: #faf9f6;
+            --paper: #f5f0e8;
+            --text: #2d2420;
+            --text-light: #6b5d54;
+            --border: #e8e0d5;
         }
 
         html {
@@ -25,8 +30,8 @@
 
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: var(--light);
-            color: #1e293b;
+            background: var(--warm-bg);
+            color: var(--text);
             overflow-x: hidden;
         }
 
@@ -37,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark);
+            background: var(--primary);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -55,24 +60,14 @@
             color: white;
             font-size: 2rem;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
             margin-bottom: 2rem;
-            background: linear-gradient(90deg, #fff, var(--ustb-blue), #fff);
-            background-size: 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200%; }
-            100% { background-position: 200%; }
         }
 
         .loader-bar {
-            width: 200px;
+            width: 160px;
             height: 2px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.2);
             border-radius: 2px;
             overflow: hidden;
         }
@@ -82,7 +77,7 @@
             display: block;
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, var(--ustb-blue), var(--ustb-red));
+            background: #a8c696;
             animation: load 1.5s ease forwards;
         }
 
@@ -91,7 +86,7 @@
             100% { width: 100%; }
         }
 
-        /* 导航栏 - 全宽 */
+        /* 导航 */
         nav {
             position: fixed;
             top: 0;
@@ -106,20 +101,17 @@
         }
 
         nav.scrolled {
-            background: rgba(255,255,255,0.9);
+            background: rgba(250,249,246,0.95);
             backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
             padding: 0.8rem 5%;
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--ustb-blue), var(--ustb-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
+            color: var(--primary);
+            letter-spacing: 0.1em;
         }
 
         .nav-links {
@@ -132,33 +124,32 @@
             text-decoration: none;
             color: white;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             position: relative;
             padding: 0.5rem 0;
             transition: color 0.3s;
-            white-space: nowrap;
+            letter-spacing: 0.05em;
         }
 
         nav.scrolled .nav-links a {
-            color: #333;
+            color: var(--text);
         }
 
-        .nav-links a::before {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--ustb-blue), var(--ustb-red));
+            background: var(--accent);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::before {
+        .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* 汉堡菜单 */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -172,21 +163,21 @@
 
         .menu-toggle span {
             display: block;
-            width: 25px;
+            width: 24px;
             height: 2px;
             background: white;
             transition: all 0.3s;
         }
 
         nav.scrolled .menu-toggle span {
-            background: #333;
+            background: var(--text);
         }
 
-        /* Hero - 全屏全宽 */
+        /* Hero - 森林绿 */
         .hero {
             min-height: 100vh;
             width: 100%;
-            background: linear-gradient(135deg, #020617 0%, #0f172a 40%, #1e3a8a 100%);
+            background: linear-gradient(160deg, #1e3a2f 0%, #2d5a3d 50%, #3d7a55 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -201,123 +192,83 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0,64,152,0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(194,14,14,0.2) 0%, transparent 50%);
-        }
-
-        .hero-particles {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
+            max-width: 800px;
         }
 
         .hero-badge {
             display: inline-block;
             padding: 0.5rem 1.5rem;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.25);
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
+            letter-spacing: 0.1em;
             opacity: 0;
             animation: fadeInUp 1s ease 0.2s forwards;
         }
 
         .hero h1 {
-            font-size: 5rem;
+            font-size: 4.5rem;
             font-weight: 900;
             margin-bottom: 1.5rem;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             line-height: 1.1;
             opacity: 0;
             animation: fadeInUp 1s ease 0.4s forwards;
-            text-shadow: 0 0 80px rgba(0,64,152,0.5);
         }
 
         .hero .subtitle {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 300;
             margin-bottom: 0.8rem;
             opacity: 0;
             animation: fadeInUp 1s ease 0.6s forwards;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.1em;
         }
 
         .hero .school {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
             margin-bottom: 3rem;
             opacity: 0;
             animation: fadeInUp 1s ease 0.8s forwards;
+            letter-spacing: 0.05em;
         }
 
         .hero-btn {
             display: inline-block;
-            padding: 1.1rem 3.5rem;
-            background: linear-gradient(135deg, var(--ustb-red), #dc2626);
+            padding: 1rem 3rem;
+            background: var(--accent);
             color: white;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.05rem;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 1rem;
             transition: all 0.4s;
             opacity: 0;
             animation: fadeInUp 1s ease 1s forwards;
-            box-shadow: 0 10px 40px rgba(194,14,14,0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .hero-btn:hover::before {
-            left: 100%;
+            letter-spacing: 0.1em;
+            border: 1px solid transparent;
         }
 
         .hero-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 50px rgba(194,14,14,0.5);
+            background: transparent;
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 向下滚动提示 */
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
@@ -327,31 +278,27 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
             animation: bounce 2s infinite;
             z-index: 2;
         }
 
-        .scroll-indicator svg {
-            width: 24px;
-            height: 24px;
-        }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+            40% { transform: translateX(-50%) translateY(-8px); }
+            60% { transform: translateX(-50%) translateY(-4px); }
         }
 
-        /* 通用区块 - 全宽背景 + 内容居中 */
+        /* 通用区块 */
         .section-wrapper {
             width: 100%;
-            padding: 7rem 5%;
+            padding: 6rem 5%;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
@@ -363,215 +310,191 @@
         .section-label {
             display: inline-block;
             padding: 0.4rem 1.2rem;
-            background: rgba(0,64,152,0.08);
-            color: var(--ustb-blue);
-            border-radius: 50px;
-            font-size: 0.85rem;
+            background: var(--paper);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
         }
 
         .section-title {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 900;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #0f172a, var(--ustb-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
+            letter-spacing: 0.05em;
         }
 
         .section-subtitle {
-            color: #64748b;
-            font-size: 1.15rem;
-            max-width: 600px;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            max-width: 500px;
             margin: 0 auto;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         /* 关于我们 */
         .about-section {
             background: white;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            gap: 4rem;
             align-items: center;
         }
 
         .about-text {
-            line-height: 1.9;
-            color: #475569;
-            font-size: 1.05rem;
+            line-height: 2;
+            color: var(--text-light);
+            font-size: 1rem;
         }
 
         .about-text p {
             margin-bottom: 1.2rem;
+            text-align: justify;
         }
 
         .about-text strong {
-            color: var(--ustb-blue);
+            color: var(--primary);
             font-weight: 600;
         }
 
         .about-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-            padding: 2.5rem 2rem;
-            border-radius: 24px;
+            background: var(--warm-bg);
+            padding: 2rem;
+            border-radius: 12px;
             text-align: center;
-            transition: all 0.4s;
-            border: 1px solid rgba(0,64,152,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--ustb-blue), var(--ustb-red));
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .stat-card:hover::before {
-            transform: scaleX(1);
+            transition: all 0.3s;
+            border: 1px solid var(--border);
         }
 
         .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-color: var(--accent);
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.4rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--ustb-blue), var(--ustb-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent);
             line-height: 1;
         }
 
         .stat-label {
-            color: #64748b;
-            margin-top: 0.8rem;
-            font-size: 0.95rem;
-            font-weight: 500;
+            color: var(--text-light);
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
         }
 
         /* 成果展示 */
         .achievements-section {
-            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            background: var(--warm-bg);
         }
 
         .achievement-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
 
         .achievement-card {
             background: white;
-            border-radius: 24px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(0,64,152,0.06);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
             cursor: pointer;
         }
 
         .achievement-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 30px 60px rgba(0,64,152,0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+            border-color: #c5d4b8;
         }
 
         .card-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--ustb-blue), #1e40af, var(--ustb-red));
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%);
         }
 
         .card-body {
-            padding: 1.8rem;
+            padding: 1.6rem;
         }
 
         .card-tag {
             display: inline-block;
-            padding: 0.35rem 1rem;
-            background: rgba(0,64,152,0.08);
-            color: var(--ustb-blue);
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.25rem 0.8rem;
+            background: #eef4e8;
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.75rem;
             font-weight: 600;
             margin-bottom: 0.8rem;
+            letter-spacing: 0.05em;
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 700;
             margin-bottom: 0.6rem;
-            color: #0f172a;
+            color: var(--text);
         }
 
         .card-desc {
-            color: #64748b;
+            color: var(--text-light);
             line-height: 1.7;
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         .card-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--ustb-blue);
+            gap: 0.4rem;
+            color: var(--accent);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: gap 0.3s;
         }
 
         .achievement-card:hover .card-btn {
-            gap: 0.8rem;
+            gap: 0.7rem;
         }
 
-        /* 详情弹窗 */
+        /* 弹窗 */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(8px);
+            background: rgba(30, 40, 30, 0.75);
+            backdrop-filter: blur(6px);
             z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 1.5rem;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .modal-overlay.active {
@@ -581,31 +504,31 @@
 
         .modal {
             background: white;
-            border-radius: 32px;
-            max-width: 900px;
+            border-radius: 16px;
+            max-width: 800px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.2);
         }
 
         .modal-overlay.active .modal {
-            transform: scale(1) translateY(0);
+            transform: translateY(0);
         }
 
         .modal-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 44px;
-            height: 44px;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: rgba(0,0,0,0.05);
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -615,72 +538,62 @@
         }
 
         .modal-close:hover {
-            background: var(--ustb-red);
+            background: var(--accent);
             color: white;
-            transform: rotate(90deg);
         }
 
         .modal-hero {
-            height: 280px;
-            background: linear-gradient(135deg, var(--ustb-blue), var(--ustb-red));
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary), #4a7a5a);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 5rem;
-            position: relative;
-        }
-
-        .modal-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(180deg, transparent, white);
+            font-size: 3.5rem;
         }
 
         .modal-body {
-            padding: 2rem 3rem 3rem;
+            padding: 2rem 2.5rem 2.5rem;
         }
 
         .modal-tag {
             display: inline-block;
-            padding: 0.4rem 1.2rem;
-            background: rgba(0,64,152,0.1);
-            color: var(--ustb-blue);
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 0.3rem 1rem;
+            background: #eef4e8;
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .modal-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            color: #0f172a;
-            margin-bottom: 1.5rem;
+            color: var(--text);
+            margin-bottom: 1.2rem;
         }
 
         .modal-content {
-            color: #475569;
-            line-height: 1.9;
-            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 2;
+            font-size: 0.95rem;
         }
 
         .modal-content p {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: justify;
         }
 
         .modal-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: #f8fafc;
-            border-radius: 16px;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: var(--warm-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
         }
 
         .modal-stat {
@@ -688,39 +601,40 @@
         }
 
         .modal-stat-value {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            color: var(--ustb-blue);
+            color: var(--accent);
         }
 
         .modal-stat-label {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-top: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.2rem;
         }
 
         .modal-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
         }
 
         .modal-gallery-item {
             aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            border-radius: 12px;
+            background: var(--paper);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            overflow: hidden;
+            color: #a89888;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
         }
 
         /* 时间线 */
         .timeline-section {
             background: white;
+            border-top: 1px solid var(--border);
         }
 
         .timeline-container {
@@ -736,25 +650,26 @@
             transform: translateX(-50%);
             width: 2px;
             height: 100%;
-            background: linear-gradient(180deg, var(--ustb-blue), var(--ustb-red));
+            background: linear-gradient(180deg, var(--primary), var(--accent));
         }
 
         .timeline-item {
             display: flex;
             justify-content: flex-end;
-            padding-right: 50%;
+            padding-right: calc(50% + 30px);
             position: relative;
             margin-bottom: 3rem;
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateX(-40px);
             transition: all 0.7s ease;
+            cursor: pointer;
         }
 
         .timeline-item:nth-child(even) {
             justify-content: flex-start;
             padding-right: 0;
-            padding-left: 50%;
-            transform: translateX(50px);
+            padding-left: calc(50% + 30px);
+            transform: translateX(40px);
         }
 
         .timeline-item.visible {
@@ -763,98 +678,105 @@
         }
 
         .timeline-content {
-            background: #f8fafc;
+            background: var(--warm-bg);
             padding: 1.8rem 2rem;
-            border-radius: 20px;
-            margin-right: 2.5rem;
+            border-radius: 12px;
             max-width: 380px;
             position: relative;
-            border: 1px solid rgba(0,64,152,0.08);
+            border: 1px solid var(--border);
             transition: all 0.3s;
         }
 
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-right: 0;
-            margin-left: 2.5rem;
-        }
-
         .timeline-content:hover {
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-color: var(--accent);
+            transform: translateY(-3px);
         }
 
         .timeline-dot {
             position: absolute;
             left: 50%;
+            top: 1.8rem;
             transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             background: white;
-            border: 4px solid var(--ustb-red);
+            border: 3px solid var(--accent);
             border-radius: 50%;
-            box-shadow: 0 0 0 6px rgba(194,14,14,0.15);
+            box-shadow: 0 0 0 4px rgba(107,142,90,0.15);
             z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.3);
+            box-shadow: 0 0 0 8px rgba(107,142,90,0.1);
         }
 
         .timeline-date {
-            color: var(--ustb-blue);
+            color: var(--accent);
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
         }
 
         .timeline-content h4 {
-            font-size: 1.15rem;
-            color: #0f172a;
+            font-size: 1.1rem;
+            color: var(--text);
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
 
         .timeline-content p {
-            color: #64748b;
-            font-size: 0.95rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
             line-height: 1.7;
+        }
+
+        .timeline-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover .timeline-arrow {
+            opacity: 1;
+            gap: 0.6rem;
         }
 
         /* 页脚 */
         footer {
-            background: #020617;
+            background: var(--primary);
             color: white;
             text-align: center;
-            padding: 5rem 5% 3rem;
-            position: relative;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--ustb-blue), var(--ustb-red), transparent);
+            padding: 4rem 5% 3rem;
         }
 
         .footer-logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.9);
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             flex-wrap: wrap;
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
             transition: color 0.3s;
             font-size: 0.9rem;
@@ -865,16 +787,16 @@
         }
 
         .footer-info {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
             line-height: 2;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         /* 滚动显示 */
         .scroll-reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.9s ease;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
         .scroll-reveal.visible {
@@ -884,8 +806,8 @@
 
         /* 响应式 */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; letter-spacing: 0.05em; }
-            .hero .subtitle { font-size: 1.2rem; }
+            .hero h1 { font-size: 2.6rem; letter-spacing: 0.1em; }
+            .hero .subtitle { font-size: 1.1rem; }
             
             .menu-toggle { display: flex; }
             
@@ -895,57 +817,76 @@
                 right: -100%;
                 width: 70%;
                 height: 100vh;
-                background: rgba(255,255,255,0.98);
+                background: rgba(250,249,246,0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 2rem;
                 transition: right 0.4s ease;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.08);
             }
             
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
+            .nav-links a { color: var(--text) !important; font-size: 1.1rem; }
             
-            .nav-links a {
-                color: #333 !important;
-                font-size: 1.2rem;
-            }
-            
-            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .achievement-grid { grid-template-columns: 1fr; }
-            .timeline-container::before { left: 20px; }
-            .timeline-item, .timeline-item:nth-child(even) {
-                justify-content: flex-start;
-                padding-left: 55px;
-                padding-right: 0;
-                transform: translateX(-30px);
+            .section-title { font-size: 1.8rem; }
+            .section-wrapper { padding: 4rem 5%; }
+            
+            .timeline-container::before {
+                left: 24px;
+                transform: none;
             }
-            .timeline-item:nth-child(even) { transform: translateX(-30px); }
-            .timeline-content { margin: 0 !important; max-width: 100%; }
-            .timeline-dot { left: 20px; transform: translateX(-50%); }
-            .modal { border-radius: 20px; }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+                transform: translateX(-20px);
+            }
+            
+            .timeline-item:nth-child(even) {
+                transform: translateX(-20px);
+            }
+            
+            .timeline-item.visible {
+                transform: translateX(0);
+            }
+            
+            .timeline-content {
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .timeline-dot {
+                left: 24px;
+                transform: translateX(-50%);
+                top: 1.5rem;
+            }
+            
+            .timeline-item:hover .timeline-dot {
+                transform: translateX(-50%) scale(1.3);
+            }
+            
+            .modal { border-radius: 12px; }
             .modal-body { padding: 1.5rem; }
-            .modal-hero { height: 200px; font-size: 3rem; }
+            .modal-hero { height: 160px; font-size: 2.5rem; }
             .modal-stats { grid-template-columns: 1fr; }
             .modal-gallery { grid-template-columns: 1fr; }
-            .section-title { font-size: 2rem; }
-            .section-wrapper { padding: 5rem 5%; }
-            .about-stats { grid-template-columns: 1fr 1fr; }
+            .timeline-arrow { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 加载动画 -->
     <div class="loader" id="loader">
         <div class="loader-text">本心研续</div>
         <div class="loader-bar"></div>
     </div>
 
-    <!-- 导航 -->
     <nav id="navbar">
         <div class="logo">本心研续</div>
         <ul class="nav-links" id="navLinks">
@@ -961,25 +902,22 @@
         </button>
     </nav>
 
-    <!-- 首屏 - 全宽 -->
     <section class="hero">
-        <div class="hero-particles" id="particles"></div>
         <div class="hero-content">
             <div class="hero-badge">北京科技大学 · 社会实践团</div>
             <h1>本心研续</h1>
             <div class="subtitle">以初心为引，以研究为续</div>
             <div class="school">社会实践成果展示平台</div>
-            <a href="#achievements" class="hero-btn">探索成果 →</a>
+            <a href="#achievements" class="hero-btn">探索成果</a>
         </div>
         <div class="scroll-indicator">
             <span>向下滚动</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 5v14M5 12l7 7 7-7"/>
             </svg>
         </div>
     </section>
 
-    <!-- 关于我们 - 全宽背景 -->
     <div class="section-wrapper about-section" id="about">
         <div class="container">
             <div class="section-header scroll-reveal">
@@ -1016,7 +954,6 @@
         </div>
     </div>
 
-    <!-- 成果展示 - 全宽背景 -->
     <div class="section-wrapper achievements-section" id="achievements">
         <div class="container">
             <div class="section-header scroll-reveal">
@@ -1026,7 +963,7 @@
             </div>
             
             <div class="achievement-grid">
-                <div class="achievement-card scroll-reveal" onclick="openModal(0)">
+                <div class="achievement-card scroll-reveal" onclick="openModal('achievement', 0)">
                     <div class="card-image">📊</div>
                     <div class="card-body">
                         <span class="card-tag">调研报告</span>
@@ -1036,7 +973,7 @@
                     </div>
                 </div>
                 
-                <div class="achievement-card scroll-reveal" onclick="openModal(1)">
+                <div class="achievement-card scroll-reveal" onclick="openModal('achievement', 1)">
                     <div class="card-image">🔬</div>
                     <div class="card-body">
                         <span class="card-tag">科普宣讲</span>
@@ -1046,7 +983,7 @@
                     </div>
                 </div>
                 
-                <div class="achievement-card scroll-reveal" onclick="openModal(2)">
+                <div class="achievement-card scroll-reveal" onclick="openModal('achievement', 2)">
                     <div class="card-image">🎥</div>
                     <div class="card-body">
                         <span class="card-tag">影像记录</span>
@@ -1056,7 +993,7 @@
                     </div>
                 </div>
                 
-                <div class="achievement-card scroll-reveal" onclick="openModal(3)">
+                <div class="achievement-card scroll-reveal" onclick="openModal('achievement', 3)">
                     <div class="card-image">📚</div>
                     <div class="card-body">
                         <span class="card-tag">红色教育</span>
@@ -1066,7 +1003,7 @@
                     </div>
                 </div>
                 
-                <div class="achievement-card scroll-reveal" onclick="openModal(4)">
+                <div class="achievement-card scroll-reveal" onclick="openModal('achievement', 4)">
                     <div class="card-image">💡</div>
                     <div class="card-body">
                         <span class="card-tag">创新方案</span>
@@ -1076,7 +1013,7 @@
                     </div>
                 </div>
                 
-                <div class="achievement-card scroll-reveal" onclick="openModal(5)">
+                <div class="achievement-card scroll-reveal" onclick="openModal('achievement', 5)">
                     <div class="card-image">🌐</div>
                     <div class="card-body">
                         <span class="card-tag">媒体宣传</span>
@@ -1089,13 +1026,12 @@
         </div>
     </div>
 
-    <!-- 详情弹窗 -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
             <div class="modal-hero" id="modalHero">📊</div>
             <div class="modal-body">
-                <span class="modal-tag" id="modalTag">调研报告</span>
+                <span class="modal-tag" id="modalTag">标签</span>
                 <h2 class="modal-title" id="modalTitle">标题</h2>
                 <div class="modal-stats" id="modalStats"></div>
                 <div class="modal-content" id="modalContent"></div>
@@ -1104,56 +1040,58 @@
         </div>
     </div>
 
-    <!-- 时间线 - 全宽背景 -->
     <div class="section-wrapper timeline-section" id="timeline">
         <div class="container">
             <div class="section-header scroll-reveal">
                 <div class="section-label">TIMELINE</div>
                 <h2 class="section-title">实践历程</h2>
-                <p class="section-subtitle">一步一个脚印，记录我们的成长轨迹</p>
+                <p class="section-subtitle">一步一个脚印，记录我们的成长轨迹，点击卡片查看详细经过</p>
             </div>
             
             <div class="timeline-container">
-                <div class="timeline-item scroll-reveal">
+                <div class="timeline-item scroll-reveal" onclick="openModal('timeline', 0)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">2025年6月 · 筹备期</div>
                         <h4>团队组建与方案设计</h4>
-                        <p>完成跨学科队员招募，召开10余次筹备会议，确定"乡村振兴+科技普及"双主线实践方案。</p>
+                        <p>完成跨学科队员招募，召开10余次筹备会议，确定双主线实践方案。</p>
+                        <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
                 
-                <div class="timeline-item scroll-reveal">
+                <div class="timeline-item scroll-reveal" onclick="openModal('timeline', 1)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">2025年7月 · 调研期</div>
                         <h4>实地走访与数据采集</h4>
-                        <p>分赴河北、山西等地5个典型村落，开展入户访谈200余次，回收有效问卷1500份。</p>
+                        <p>分赴河北、山西等地5个典型村落，开展入户访谈200余次。</p>
+                        <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
                 
-                <div class="timeline-item scroll-reveal">
+                <div class="timeline-item scroll-reveal" onclick="openModal('timeline', 2)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">2025年8月 · 服务期</div>
                         <h4>科普宣讲与志愿服务</h4>
-                        <p>面向当地中小学生开展科技科普、课业辅导等活动，建立"一对一"帮扶对子30个。</p>
+                        <p>面向当地中小学生开展科技科普、课业辅导等活动。</p>
+                        <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
                 
-                <div class="timeline-item scroll-reveal">
+                <div class="timeline-item scroll-reveal" onclick="openModal('timeline', 3)">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">2025年9月 · 总结期</div>
                         <h4>成果凝练与展示汇报</h4>
-                        <p>整理数据形成6篇调研报告，制作纪录片与宣传册，参加校级社会实践评比。</p>
+                        <p>整理数据形成6篇调研报告，制作纪录片与宣传册。</p>
+                        <div class="timeline-arrow">查看详细经过 →</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 页脚 - 全宽 -->
     <footer id="contact">
         <div class="footer-logo">本心研续</div>
         <div class="footer-links">
@@ -1170,36 +1108,17 @@
     </footer>
 
     <script>
-        // 加载动画
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
             }, 1500);
         });
 
-        // 粒子背景
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDelay = Math.random() * 15 + 's';
-            p.style.animationDuration = (10 + Math.random() * 10) + 's';
-            p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
-            particlesContainer.appendChild(p);
-        }
-
-        // 导航栏滚动
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // 移动端菜单
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
         }
@@ -1208,21 +1127,17 @@
             document.getElementById('navLinks').classList.remove('active');
         }
 
-        // 滚动显示
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.scroll-reveal, .timeline-item').forEach(el => {
             observer.observe(el);
         });
 
-        // 详情数据
-        const modalData = [
+        const achievementData = [
             {
                 icon: '📊',
                 tag: '调研报告',
@@ -1262,7 +1177,7 @@
                 stats: [
                     { value: '25', label: '拍摄天数' },
                     { value: '500+', label: '素材片段' },
-                    { value: '3', label: '获奖等级' }
+                    { value: '一等奖', label: '获奖等级' }
                 ],
                 content: `
                     <p>团队组建了由新闻专业同学领衔的摄制组，全程跟拍实践过程，累计拍摄原始素材超过200GB，最终剪辑成25分钟纪录片《初心》。</p>
@@ -1294,7 +1209,7 @@
                 stats: [
                     { value: '2', label: '试点学校' },
                     { value: '30%', label: '成本降低' },
-                    { value: '1', label: '专利申报' }
+                    { value: '1项', label: '专利申报' }
                 ],
                 content: `
                     <p>针对乡村学校多媒体设备老化、网络条件差、维护成本高等问题，团队发挥计算机专业特长，设计了一套"低成本、易维护、可扩展"的智慧教室改造方案。</p>
@@ -1310,7 +1225,7 @@
                 stats: [
                     { value: '7', label: '媒体报道' },
                     { value: '50万+', label: '全网阅读' },
-                    { value: '3', label: '平台账号' }
+                    { value: '3个', label: '平台账号' }
                 ],
                 content: `
                     <p>团队建立了"微信公众号+微博+短视频"三位一体的宣传矩阵，全程记录实践点滴，发布图文推送20余篇、短视频15条。</p>
@@ -1321,9 +1236,75 @@
             }
         ];
 
-        // 弹窗控制
-        function openModal(index) {
-            const data = modalData[index];
+        const timelineData = [
+            {
+                icon: '📋',
+                tag: '筹备期',
+                title: '团队组建与方案设计',
+                stats: [
+                    { value: '15', label: '队员人数' },
+                    { value: '10+', label: '筹备会议' },
+                    { value: '3', label: '专业领域' }
+                ],
+                content: `
+                    <p>2025年6月初，团队面向全校发布招募通知，经过简历筛选与面试，最终确定15名来自材料、计算机、文法、经管等不同学院的队员。</p>
+                    <p>在为期两周的筹备期内，团队召开了10余次线上线下会议。我们查阅了大量文献资料，联系了多地团委与村委会，最终确定了"乡村振兴调研+科技普及服务"的双主线方案。</p>
+                    <p>为确保实践顺利，团队还进行了安全培训、调研方法培训，并提前制作了问卷、访谈提纲等调研工具。</p>
+                `,
+                gallery: ['招募海报', '面试现场', '筹备会议', '物资准备', '安全培训', '方案定稿']
+            },
+            {
+                icon: '🚶',
+                tag: '调研期',
+                title: '实地走访与数据采集',
+                stats: [
+                    { value: '5', label: '调研村落' },
+                    { value: '200+', label: '入户访谈' },
+                    { value: '1500', label: '回收问卷' }
+                ],
+                content: `
+                    <p>7月中旬，团队分三路赴河北省保定市、山西省大同市等地5个典型农业村落开展实地调研。</p>
+                    <p>每天早上6点，队员们就跟随村民下田，记录农作物种植情况；白天走访农户，了解收入结构与产业困境；晚上整理访谈录音，录入问卷数据。15天内，团队累计行走超过100公里。</p>
+                    <p>调研中，我们不仅收集数据，更与村民建立了深厚感情。临走时，多位村民拉着队员的手说："你们下次一定要再来！"</p>
+                `,
+                gallery: ['出发合影', '入户访谈', '田间考察', '问卷填写', '村干部座谈', '晚间整理']
+            },
+            {
+                icon: '🎓',
+                tag: '服务期',
+                title: '科普宣讲与志愿服务',
+                stats: [
+                    { value: '12', label: '宣讲场次' },
+                    { value: '30', label: '帮扶对子' },
+                    { value: '800+', label: '受益学生' }
+                ],
+                content: `
+                    <p>8月，团队在当地两所中学建立了"科技夏令营"，开展了为期两周的科普宣讲与志愿服务。</p>
+                    <p>我们带来了3D打印笔、简易机器人、化学实验套装等教具，让孩子们第一次亲手"造"出东西。材料学院的同学用生动的比喻讲解金属结构，计算机学院的同学带孩子们写下第一行代码。</p>
+                    <p>除了科普，团队还建立了30个"一对一"学业帮扶对子，承诺长期线上辅导。结营那天，孩子们用刚学的3D打印笔为每位队员制作了一枚"勋章"。</p>
+                `,
+                gallery: ['开营仪式', '科普课堂', '实验操作', '编程体验', '帮扶结对', '结营合影']
+            },
+            {
+                icon: '✍️',
+                tag: '总结期',
+                title: '成果凝练与展示汇报',
+                stats: [
+                    { value: '6', label: '调研报告' },
+                    { value: '1', label: '纪录片' },
+                    { value: '一等奖', label: '校级评比' }
+                ],
+                content: `
+                    <p>9月返校后，团队立即投入成果整理工作。我们将海量访谈录音转录、编码，运用SPSS进行问卷数据分析，最终形成6篇高质量调研报告。</p>
+                    <p>纪录片《初心》的剪辑历时一个月，从500多个素材片段中精选出最动人的画面。首映当晚，教室里坐满了同学，不少人看到村民送别的场景时红了眼眶。</p>
+                    <p>在校级社会实践评比中，团队凭借扎实的调研数据、丰富的实践形式和广泛的社会影响，荣获一等奖。</p>
+                `,
+                gallery: ['数据整理', '报告撰写', '视频剪辑', '海报设计', '首映现场', '评比答辩']
+            }
+        ];
+
+        function openModal(type, index) {
+            const data = type === 'achievement' ? achievementData[index] : timelineData[index];
             document.getElementById('modalHero').textContent = data.icon;
             document.getElementById('modalTag').textContent = data.tag;
             document.getElementById('modalTitle').textContent = data.title;
