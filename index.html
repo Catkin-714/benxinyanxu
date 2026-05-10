@@ -351,29 +351,223 @@
         }
         .modal-close:hover { background: var(--saffron); color: var(--ivory); border-color: var(--saffron); transform: rotate(90deg); }
 
-        /* 弹窗左右切换按钮 */
-        .modal-nav {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            width: 48px; height: 48px; border-radius: 50%;
-            background: rgba(255,250,240,0.95); border: 1px solid var(--border);
-            font-size: 1.6rem; color: var(--ink); cursor: pointer; z-index: 10;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        /* 返回目录按钮 */
+        .modal-back {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            background: rgba(255,250,240,0.9);
+            border: 1px solid var(--border);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            display: none;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
         }
-        .modal-nav:hover { background: var(--saffron); color: var(--ivory); border-color: var(--saffron); transform: translateY(-50%) scale(1.1); }
-        .modal-nav.disabled { opacity: 0.3; pointer-events: none; }
-        .modal-prev { left: -64px; }
-        .modal-next { right: -64px; }
+        .modal-back.visible {
+            display: block;
+        }
+        .modal-back:hover {
+            background: var(--saffron);
+            color: var(--ivory);
+            border-color: var(--saffron);
+        }
+
+        /* 弹窗左右切换按钮（仅移动端显示） */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,250,240,0.95);
+            border: 1px solid var(--border);
+            font-size: 1.5rem;
+            color: var(--ink);
+            cursor: pointer;
+            z-index: 10;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .modal-nav:hover {
+            background: var(--saffron);
+            color: var(--ivory);
+            border-color: var(--saffron);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .modal-nav.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .modal-prev { left: 12px; }
+        .modal-next { right: 12px; }
 
         .modal-dots {
-            display: flex; justify-content: center; gap: 0.5rem;
-            margin-top: 1.5rem; padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-bottom: 0.5rem;
         }
         .modal-dot {
             width: 8px; height: 8px; border-radius: 50%; background: var(--border);
             cursor: pointer; transition: all 0.3s; border: none; padding: 0;
         }
         .modal-dot.active { background: var(--saffron); width: 24px; border-radius: 4px; }
+
+        /* 目录视图 */
+        .modal-directory {
+            display: none;
+            padding: 2rem 2.5rem 2.5rem;
+        }
+        .modal-directory.active {
+            display: block;
+        }
+        .directory-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .directory-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.8rem;
+        }
+        .directory-title {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.05em;
+        }
+        .directory-subtitle {
+            color: var(--ink-light);
+            font-size: 0.95rem;
+            opacity: 0.7;
+            letter-spacing: 0.05em;
+        }
+        .directory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+        .directory-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, var(--ivory-warm), var(--sand));
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .directory-item:hover {
+            transform: translateX(8px);
+            border-color: var(--saffron);
+            box-shadow: 0 8px 24px rgba(26,15,46,0.08);
+        }
+        .directory-item-num {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--clay);
+            opacity: 0.35;
+            min-width: 36px;
+            text-align: center;
+        }
+        .directory-item-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .directory-item-tag {
+            display: inline-block;
+            padding: 0.25rem 0.8rem;
+            background: linear-gradient(135deg, rgba(232,93,4,0.1), rgba(0,180,216,0.1));
+            color: var(--saffron);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.1em;
+        }
+        .directory-item-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
+        }
+        .directory-item-desc {
+            font-size: 0.85rem;
+            color: var(--ink-light);
+            opacity: 0.75;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .directory-item-arrow {
+            font-size: 1.2rem;
+            color: var(--clay);
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        .directory-item:hover .directory-item-arrow {
+            color: var(--saffron);
+            transform: translateX(4px);
+        }
+
+        /* 文章底部导航 */
+        .article-nav {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .article-nav.visible {
+            display: flex;
+        }
+        .article-nav-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--ivory);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+        .article-nav-btn:hover:not(.disabled) {
+            background: var(--saffron);
+            color: var(--ivory);
+            border-color: var(--saffron);
+            transform: translateY(-2px);
+        }
+        .article-nav-btn.disabled {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        .article-nav-btn.center {
+            flex: 0.7;
+            background: linear-gradient(135deg, var(--ivory-warm), var(--sand));
+        }
 
         /* 文章标题列表 */
         .story-list {
@@ -519,7 +713,7 @@
             .modal-hero { height: 180px; font-size: 3rem; }
             .modal-stats { grid-template-columns: 1fr; }
             .modal-gallery { grid-template-columns: 1fr; }
-            .modal-nav { width: 40px; height: 40px; font-size: 1.3rem; }
+            .modal-nav { display: flex !important; width: 40px; height: 40px; font-size: 1.3rem; }
             .modal-prev { left: 8px; }
             .modal-next { right: 8px; }
             .story-item { font-size: 0.85rem; padding: 0.6rem 0.8rem; }
@@ -534,6 +728,15 @@
             .timeline-content { max-width: 100%; margin: 0; }
             .timeline-dot { left: 24px; transform: translateX(-50%); top: 1.5rem; }
             .timeline-item:hover .timeline-dot { transform: translateX(-50%) scale(1.3); }
+
+            .modal-directory { padding: 1.5rem; }
+            .directory-title { font-size: 1.4rem; }
+            .directory-item { padding: 1rem; gap: 0.8rem; }
+            .directory-item-num { font-size: 1.3rem; min-width: 30px; }
+            .directory-item-title { font-size: 0.95rem; }
+            .directory-item-desc { -webkit-line-clamp: 1; }
+            .article-nav-btn { font-size: 0.8rem; padding: 0.6rem 0.5rem; }
+            .modal-back { top: 0.8rem; left: 0.8rem; font-size: 0.8rem; padding: 0.4rem 0.8rem; }
         }
     </style>
 </head>
@@ -768,25 +971,35 @@
         </div>
     </div>
 
-    <!-- 弹窗详情（支持左右/滑动切换同地点多篇推文） -->
+    <!-- 弹窗详情（支持目录 + 文章切换） -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
+            <button class="modal-back" id="modalBack" onclick="showLocationDirectory()">← 返回目录</button>
             <button class="modal-nav modal-prev" id="modalPrev" onclick="changeStory(-1)">‹</button>
             <button class="modal-nav modal-next" id="modalNext" onclick="changeStory(1)">›</button>
 
             <div class="modal-hero" id="modalHero">📊</div>
-            <div class="modal-body">
+            
+            <!-- 目录视图 -->
+            <div class="modal-directory" id="modalDirectory"></div>
+            
+            <!-- 文章视图 -->
+            <div class="modal-body" id="modalBody">
                 <span class="modal-tag" id="modalTag">标签</span>
                 <h2 class="modal-title" id="modalTitle">标题</h2>
                 <div class="modal-stats" id="modalStats"></div>
                 <div class="modal-content" id="modalContent"></div>
                 <div class="modal-gallery" id="modalGallery"></div>
-
-                <!-- 文章列表 -->
                 <div class="story-list" id="storyList"></div>
-
                 <div class="modal-dots" id="modalDots"></div>
+                
+                <!-- 底部文章导航 -->
+                <div class="article-nav" id="articleNav">
+                    <button class="article-nav-btn" id="navPrev" onclick="changeStory(-1)">← 上一篇</button>
+                    <button class="article-nav-btn center" onclick="showLocationDirectory()">返回目录</button>
+                    <button class="article-nav-btn" id="navNext" onclick="changeStory(1)">下一篇 →</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1288,18 +1501,35 @@
         };
 
         /* ==========================================
-           弹窗逻辑（支持单篇 + 地点多篇切换）
+           弹窗逻辑（支持目录 + 文章切换）
            ========================================== */
         let currentLocation = null;
         let currentStoryIndex = 0;
         let isLocationMode = false;
 
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
         function openModal(index) {
             isLocationMode = false;
             const data = modalData[index];
             renderModalContent(data);
+            
+            // 隐藏目录和返回按钮
+            document.getElementById('modalDirectory').classList.remove('active');
+            document.getElementById('modalBody').style.display = 'block';
+            document.getElementById('modalBack').classList.remove('visible');
+            
+            // 隐藏浮动左右按钮
             document.getElementById('modalPrev').style.display = 'none';
             document.getElementById('modalNext').style.display = 'none';
+            
+            // 隐藏底部导航
+            document.getElementById('articleNav').classList.remove('visible');
+            
             document.getElementById('modalDots').innerHTML = '';
             document.getElementById('storyList').innerHTML = '';
             document.getElementById('modalOverlay').classList.add('active');
@@ -1310,14 +1540,75 @@
             isLocationMode = true;
             currentLocation = locationKey;
             currentStoryIndex = storyIndex;
-            renderLocationStory();
+            showLocationDirectory();
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function renderLocationStory() {
+        function showLocationDirectory() {
             const loc = locationData[currentLocation];
-            const story = loc.stories[currentStoryIndex];
+            const directoryEl = document.getElementById('modalDirectory');
+            const bodyEl = document.getElementById('modalBody');
+            const backBtn = document.getElementById('modalBack');
+            const hero = document.getElementById('modalHero');
+            
+            // 设置hero为地点图标
+            hero.className = 'modal-hero ' + loc.colorClass;
+            hero.textContent = loc.icon;
+            
+            // 显示目录，隐藏文章
+            directoryEl.classList.add('active');
+            bodyEl.style.display = 'none';
+            backBtn.classList.remove('visible');
+            
+            // 隐藏浮动左右按钮
+            document.getElementById('modalPrev').style.display = 'none';
+            document.getElementById('modalNext').style.display = 'none';
+            
+            // 隐藏底部导航
+            document.getElementById('articleNav').classList.remove('visible');
+            
+            // 渲染目录内容
+            const subtitle = loc.stories[0].title.includes('·') ? loc.stories[0].title.split('·')[1].trim() : '实践纪实';
+            directoryEl.innerHTML = `
+                <div class="directory-header">
+                    <div class="directory-icon">${loc.icon}</div>
+                    <h2 class="directory-title">${loc.name} · ${subtitle}</h2>
+                    <p class="directory-subtitle">共 ${loc.stories.length} 篇文章</p>
+                </div>
+                <div class="directory-list">
+                    ${loc.stories.map((story, i) => `
+                        <div class="directory-item" onclick="showLocationArticle(${i})">
+                            <div class="directory-item-num">${String(i + 1).padStart(2, '0')}</div>
+                            <div class="directory-item-body">
+                                <div class="directory-item-tag">${story.tag}</div>
+                                <div class="directory-item-title">${story.title}</div>
+                                <div class="directory-item-desc">${stripHtml(story.content).substring(0, 55)}...</div>
+                            </div>
+                            <div class="directory-item-arrow">→</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function showLocationArticle(index) {
+            currentStoryIndex = index;
+            const loc = locationData[currentLocation];
+            const story = loc.stories[index];
+            
+            // 隐藏目录，显示文章
+            document.getElementById('modalDirectory').classList.remove('active');
+            document.getElementById('modalBody').style.display = 'block';
+            document.getElementById('modalBack').classList.add('visible');
+            
+            // 浮动左右按钮（CSS控制在桌面端隐藏，移动端显示）
+            const prevBtn = document.getElementById('modalPrev');
+            const nextBtn = document.getElementById('modalNext');
+            prevBtn.classList.toggle('disabled', index === 0);
+            nextBtn.classList.toggle('disabled', index === loc.stories.length - 1);
+            
+            // 渲染文章内容
             const data = {
                 icon: loc.icon,
                 tag: story.tag,
@@ -1328,29 +1619,19 @@
                 gallery: story.gallery
             };
             renderModalContent(data);
-
-            const prevBtn = document.getElementById('modalPrev');
-            const nextBtn = document.getElementById('modalNext');
-            prevBtn.style.display = loc.stories.length > 1 ? 'flex' : 'none';
-            nextBtn.style.display = loc.stories.length > 1 ? 'flex' : 'none';
-            prevBtn.classList.toggle('disabled', currentStoryIndex === 0);
-            nextBtn.classList.toggle('disabled', currentStoryIndex === loc.stories.length - 1);
-
-            // Dots
+            
+            // 渲染dots
             document.getElementById('modalDots').innerHTML = loc.stories.map((_, i) =>
-                `<button class="modal-dot ${i === currentStoryIndex ? 'active' : ''}" onclick="jumpToStory(${i})"></button>`
+                `<button class="modal-dot ${i === index ? 'active' : ''}" onclick="jumpToStory(${i})"></button>`
             ).join('');
-
-            // Story list
-            const listContainer = document.getElementById('storyList');
-            listContainer.innerHTML = `
-                <div class="story-list-title">本地点文章 (${currentStoryIndex + 1}/${loc.stories.length})</div>
-                ${loc.stories.map((s, i) => `
-                    <div class="story-item ${i === currentStoryIndex ? 'active' : ''}" onclick="jumpToStory(${i})">
-                        ${s.title}
-                    </div>
-                `).join('')}
-            `;
+            
+            // 渲染底部导航按钮状态
+            document.getElementById('articleNav').classList.add('visible');
+            document.getElementById('navPrev').classList.toggle('disabled', index === 0);
+            document.getElementById('navNext').classList.toggle('disabled', index === loc.stories.length - 1);
+            
+            // 清空原有storyList
+            document.getElementById('storyList').innerHTML = '';
         }
 
         function renderModalContent(data) {
@@ -1381,15 +1662,13 @@
             const loc = locationData[currentLocation];
             const newIndex = currentStoryIndex + dir;
             if (newIndex >= 0 && newIndex < loc.stories.length) {
-                currentStoryIndex = newIndex;
-                renderLocationStory();
+                showLocationArticle(newIndex);
             }
         }
 
         function jumpToStory(index) {
             if (!isLocationMode) return;
-            currentStoryIndex = index;
-            renderLocationStory();
+            showLocationArticle(index);
         }
 
         function closeModal(e) {
@@ -1403,6 +1682,7 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
+            if (!isLocationMode) return;
             if (e.key === 'ArrowLeft') changeStory(-1);
             if (e.key === 'ArrowRight') changeStory(1);
         });
@@ -1413,6 +1693,7 @@
         modal.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
         modal.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
+            if (!isLocationMode) return;
             if (touchStartX - touchEndX > 60) changeStory(1);
             if (touchEndX - touchStartX > 60) changeStory(-1);
         }, {passive: true});
